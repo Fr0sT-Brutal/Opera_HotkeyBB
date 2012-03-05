@@ -1,0 +1,176 @@
+﻿/*
+	HotkeyBB extension for Opera © Fr0sT
+	
+	Style sheet for options.html
+	Based on the options.css taken from Persistent Text by Jere and TabVault by Joel Spadin
+	Guys, huge thanks for wonderful visual designs
+*/
+
+html {
+	background: #e8ecf3;
+}
+
+body {
+	font: message-box;
+	color: #1e3853;
+	max-width: 60em;
+	overflow-x: hidden;
+	background: rgba(255,255,255,0.5);
+	margin: 2em auto;
+	border: 1px solid rgba(255,255,255,0.33);
+	box-shadow: 0 0 10px #98b0c9;
+}
+
+footer {
+	display: block;
+	margin: 5em 4em 0;
+	height: 4em;
+	border-top: 1px solid #fff;
+	box-shadow: 0 -1px rgba(0,0,0,0.15);
+}
+
+p#footer-text {
+	float: left;
+}
+
+button.footer-button {
+	float: right;
+	height: 2em;
+	font-weight: bold;
+}
+
+a {
+	padding: 1px 1px 0;
+	margin: -1px -1px 0;
+	text-decoration: none;
+	color: #1e3853;
+	background-color: rgba(220, 220, 220, 0);
+	border-bottom: 1px solid rgba(80,80,130,0.2);
+	-o-transition: 0.25s;
+}
+
+a:hover {
+	color: #0000cc;
+	background-color: rgba(220, 220, 220, 0.8);
+}
+
+header {
+	display: block;
+	text-align: center;
+	padding: 3em 0 1em;
+	margin: 0 4em;
+	border-bottom: 1px solid rgba(0,0,0,0.15);
+	box-shadow: 0 1px #fff;
+}
+
+div#links {
+	float: right;
+	padding: 1em 1em 0 0;
+}
+
+section {
+	display: block;
+	padding: 0 4em;
+}
+
+h1 {
+	margin: 0;
+	font: caption;
+	font-size: 200%;
+}
+
+h2 {
+	margin-top: -3px;
+	font: small-caption;
+	font-size: 120%;
+}
+
+legend {
+	margin: 0;
+	padding: 0;
+	height: 0;
+	font: small-caption;
+	font-size: 120%;
+	position: relative;
+	top: -2em;
+	left: -3ex;
+}
+
+fieldset {
+	border: none;
+	background: rgba(150,160,200,0.25);
+	border-radius: 3px;
+	margin: 4em 0 0;
+	padding: 1ex 2em;
+	text-align: justify;
+}
+
+fieldset label {
+	margin-left: 1em;
+}
+
+fieldset *:disabled {
+	opacity: 0.5;
+}
+
+button {
+	border-radius: 3px;
+	border: 1px solid rgba(80,80,130,0.5);
+	background: rgba(173,181,217,0.75) 0 50% repeat-x;
+	box-shadow: 0 1px 1px rgba(121,153,166,0.75), inset 0 1px rgba(255,255,255,0.25), inset 0 0 1px rgba(255,255,255,0.75);
+	color: rgba(0,0,0,0.75);
+	text-shadow: 0 1px rgba(255,255,255,0.25);
+	line-height: 4ex;
+	padding: 0 1em;
+	-o-transition: 0.25s;
+	font: status-bar;
+}
+
+button:hover {
+	background-color: #d3dbf5;
+}
+
+button:active {
+	border-color: rgba(80,80,130,0.8);
+	box-shadow: 0 1px 2px rgba(121,153,166,1), inset 1px 1px 1px rgba(121,153,166,0.5);
+}
+
+button:disabled {
+	background: rgba(173,181,217,0.75);
+}
+
+fieldset input, fieldset select {
+	border-radius: 3px;
+	background: #fff;
+	color: #1e3853;
+	font: status-bar;
+	-o-transition: 0.25s;
+	border: 1px solid rgba(80,80,130,0.5);
+}
+
+fieldset input:focus, fieldset select:focus {
+	border-color: rgba(80,80,130,0.8);
+}
+
+fieldset input[type=number], fieldset input[type=text] {
+	padding: 3px 5px;
+	line-height: 2ex;
+}
+
+fieldset input[type=radio] {
+	box-shadow: inset 0 1px 1px rgba(121,153,166,0.75), 0 1px rgba(255,255,255,0.25);
+}
+
+fieldset input[type=checkbox] {
+	padding: 5px;
+	box-shadow: inset 0 1px 1px rgba(121,153,166,0.75), 0 1px rgba(255,255,255,0.25);
+}
+/**/
+fieldset input[type=checkbox]:active, fieldset input[type=radio]:active {
+	border-color: rgba(80,80,130,0.8);
+	background-color: #d3dbf5;
+}
+
+fieldset input[type=checkbox]:disabled, fieldset input[type=radio]:disabled {
+	border-color: rgba(80,80,130,0.5);
+}

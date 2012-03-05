@@ -1,0 +1,36 @@
+TO-DO
+* version check
+* partial urls
+* checkboxes on Linux - ?
+* import/export
+*? toolbar button and popup with site-personal settings
+*? copyrights to Prefs page
+* more pretty checkboxes
+
+1.4
+* Filter the key combinations with modifiers only earlier
++ Added default option "SiteOptions"
++ Added license url in config.xml - eliminating warning in error console
++ Added comment about Opera event.keyCode bug to hotkeybb.js
++ New option "Default site options" - set Quotes, HTML, Uppercase modes globally
++ Feedback and blog links on Prefs page
++ Nicer links styles on Prefs page
+* Invisible pattern rows in tables - no need to store patterns inside the script
+* Empty tags are not saved
+* Removed TableId array
++ Editable closing tags
+
+1.3
++ Global "Quote mode" option
+* Quotes are off by default
+
+1.2
++ Site-specific options
+	Quotes       - whether tag options should be surrounded by quotes
+	HTMLTag      - use HTML-style tag brackets ( <> ) instead of BB-code ones ( [] )
+	TagUpperCase - insert tags in upper case
+ Currently only manual addition via Preferences page supported
+* Tags are saved in lower-case
+* Added HotkeyBB page URL to config.xml (one may go to HotkeyBB page from Extension manager page)
+* Added info on new features to description
+* Code cleanup & refactor, some error handling, scripts on Preferences page extracted into separate options.js file, typos fixed
