@@ -43,7 +43,7 @@ function closeTagCBChange(cb)
 	// request for tag
 	if (cb.selectedIndex == OPTION_ENTER)
 	{
-		var closeTag = prompt("Enter non-empty closing tag", "");
+		var closeTag = prompt(locStrings["sEnterTag"], "");
 		if (closeTag == null || closeTag == "")
 			cb.selectedIndex = OPTION_NONE;
 		else
@@ -52,7 +52,7 @@ function closeTagCBChange(cb)
 	// return default value
 	else
 	{
-		cb.options[OPTION_ENTER].label = "Enter...";
+		cb.options[OPTION_ENTER].label = locStrings["sEnter"];
 	}
 }
 

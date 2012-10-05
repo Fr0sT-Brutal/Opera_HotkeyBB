@@ -87,7 +87,7 @@ function HKBB_OnKeyDown(ev)
 	var quote        = (HKBB_SiteOptions & OPT_QUOTES)  != 0 ? '"' : '';
 	var openBracket  = (HKBB_SiteOptions & OPT_HTMLTAG) != 0 ? '<' : '[';
 	var closeBracket = (HKBB_SiteOptions & OPT_HTMLTAG) != 0 ? '>' : ']';
-
+alert(HKBB_SiteOptions);
 	// construct the tags
 	var opentag = openBracket + 
 	              ((HKBB_SiteOptions & OPT_TAGUPCASE) != 0 ? currtag.Open.toUpperCase() : currtag.Open ) +
@@ -141,20 +141,23 @@ function(ev)
 		// load site-specific data. SiteOptions might be undefined!
 		try {
 			var SiteOptions = JSON.parse(widget.preferences["SiteOptions"]);
-			// determine current URL and get option set for it
-			var urlStart;
-			var urlEnd;
-			var url = document.URL;
-			urlStart = url.indexOf("://");
-			if (urlStart == -1)
-				urlStart = 0
-			else
-				urlStart += "://".length;
-			urlEnd = url.indexOf("/", urlStart + 1);
-			if (urlEnd == -1)
-				urlEnd = url.length;
-			url = url.substring(urlStart, urlEnd);
-			HKBB_SiteOptions = SiteOptions[url];
+			// extract current URL (domain name and 1st level domain only) and get option set for it
+			var currUrl = /(https?:\/\/|file:\/\/)?(www\.)?([^\/]+)[\/]/.exec(document.URL)[3];
+			// search for site option that containt current URL
+			if (currUrl != undefined)
+			{
+				for (var url in SiteOptions)
+				{
+					// convert "*.domain.com" URL into RE
+					var rePatt=("^"+url+"$").replace(/\./g, "\\.").replace(/\*/g, ".*");
+					// check the current URL
+					if (new RegExp(rePatt).test(currUrl))
+					{
+						HKBB_SiteOptions = SiteOptions[url];
+						break;
+					}
+				}			
+			}
 		} catch(e) {}
 		// if HKBB_SiteOptions is null or undefined (no option set for current URL) - set defaults
 		if (HKBB_SiteOptions == undefined)

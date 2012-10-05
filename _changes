@@ -1,11 +1,19 @@
 TO-DO
 * version check
-* partial urls
 * checkboxes on Linux - ?
 * import/export
 *? toolbar button and popup with site-personal settings
 *? copyrights to Prefs page
 * more pretty checkboxes
+* localize hotkeybb.js (using Localization in scripts)?
+* hotkeys for custom actions (user js functions will be executed)
+* save and close
+* debug hotkey: show current url (and other props - full url, site opts, ...)
+* find real subdomain cases!
+
+1.5
+* Localization support, Russian socalization added
+* Partial urls in site options
 
 1.4
 * Filter the key combinations with modifiers only earlier

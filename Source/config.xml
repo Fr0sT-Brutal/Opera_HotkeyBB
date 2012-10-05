@@ -1,12 +1,12 @@
-<?xml version='1.0' encoding='utf-8'?>
-<widget xmlns="http://www.w3.org/ns/widgets" id="https://addons.opera.com/addons/extensions/details/hotkeybb/" version="1.4">
+﻿<?xml version='1.0' encoding='utf-8'?>
+<widget xmlns="http://www.w3.org/ns/widgets" id="https://addons.opera.com/addons/extensions/details/hotkeybb/" defaultlocale="en" version="1.5">
  <name>HotkeyBB</name>
- <icon src="images/icon.png"/>
+ <icon src="/images/icon.png"/>
  <content src="index.html" encoding="utf-8" type="text/html"/>
  <preference name="DefaultSiteOpts" value="0"/>
  <preference name="StdTags" value="[ { &quot;Open&quot;: &quot;b&quot;, &quot;HasOption&quot;: false, &quot;SelToOption&quot;: false, &quot;HKMods&quot;: 2, &quot;HKKey&quot;: &quot;B&quot; }, { &quot;Open&quot;: &quot;u&quot;, &quot;HasOption&quot;: false, &quot;SelToOption&quot;: false, &quot;HKMods&quot;: 2, &quot;HKKey&quot;: &quot;U&quot; }, { &quot;Open&quot;: &quot;i&quot;, &quot;HasOption&quot;: false, &quot;SelToOption&quot;: false, &quot;HKMods&quot;: 2, &quot;HKKey&quot;: &quot;I&quot; }, { &quot;Open&quot;: &quot;code&quot;, &quot;HasOption&quot;: false, &quot;SelToOption&quot;: false, &quot;HKMods&quot;: 2, &quot;HKKey&quot;: &quot;D&quot; }, { &quot;Open&quot;: &quot;quote&quot;, &quot;HasOption&quot;: false, &quot;SelToOption&quot;: false, &quot;HKMods&quot;: 5, &quot;HKKey&quot;: &quot;Q&quot; }, { &quot;Open&quot;: &quot;url&quot;, &quot;HasOption&quot;: true, &quot;SelToOption&quot;: true, &quot;HKMods&quot;: 5, &quot;HKKey&quot;: &quot;U&quot; }, { &quot;Open&quot;: &quot;img&quot;, &quot;HasOption&quot;: false, &quot;SelToOption&quot;: false, &quot;HKMods&quot;: 5, &quot;HKKey&quot;: &quot;I&quot; }, { &quot;Open&quot;: &quot;color&quot;, &quot;HasOption&quot;: true, &quot;SelToOption&quot;: false, &quot;HKMods&quot;: 5, &quot;HKKey&quot;: &quot;C&quot; }, { &quot;Open&quot;: &quot;spoiler&quot;, &quot;HasOption&quot;: true, &quot;SelToOption&quot;: false, &quot;HKMods&quot;: 5, &quot;HKKey&quot;: &quot;S&quot; } ]"/>
  <preference name="SiteOptions" value="{&quot;example.com&quot;: 7}"/>
- <license href="http://www.apache.org/licenses/LICENSE-2.0">Copyright 2011 Fr0sT
+ <license href="http://www.apache.org/licenses/LICENSE-2.0">Copyright 2012 Fr0sT
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ See the License for the specific language governing permissions and
 limitations under the License.</license>
  <author href="http://my.opera.com/Fr0sT" email="fr0st.brutal@gmail.com">Fr0sT</author>
  <update-description href="https://extension-updates.opera.com/api/w3c-wd1/update/f6a18303-b73c-4e5c-8643-4f064a226cd8/"/>
- <description xml:lang="en">This extension allows a user to input BB-codes and HTML tags quickly with hotkeys.
-
-HotkeyBB is intended for usage in forum/blog/guestbook reply fields. With HotkeyBB you can insert BB-code tags as fast as lightning not depending on BB-code buttons provided. You may simply insert BB-code tag pair or surround the selected text. Complicated tags with option (like [tag="option"]text[/tag]) are also supported. Depending on tag properties, you'll be prompted for option value or the selected text will be used as option. Warning! Extension intercepts ALL shortcuts including standard ones, so beware of defining such combinations as Ctrl-Z, Ctrl-X, Ctrl-C, Ctrl-V, Ctrl-A. However this happens only when input focus is within a textarea; when it isn't, shortcuts are working as usual.</description>
+ <description xml:lang="en">This extension allows a user to input BB-codes and HTML tags quickly with hotkeys.</description>
+ <description xml:lang="ru">Это расширение позволяет быстро вводить BB-коды и HTML теги с помощью горячих клавиш.</description>
 </widget>

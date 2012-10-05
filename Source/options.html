@@ -7,51 +7,60 @@
 
 <!DOCTYPE html>
 <meta charset="utf-8">
-<link rel="stylesheet" href="options/options.css">
+<link rel="stylesheet" href="/options/options.css">
 
-<title id="widget-title"></title>
+<head>
+	<title id="widget-title"></title>
+	<script src="/includes/strings.js"></script>
+	<script src="/includes/localize.js"></script>
+	<script>
+		window.addEventListener("DOMContentLoaded", 
+		                        function() {document.body.innerHTML=localize(document.body.innerHTML)});	
+	</script>
+	<script src="/options/options.js"></script>
+</head>
+
 <body>
 
 <div id="links">
-<a href="https://addons.opera.com/addons/extensions/details/hotkeybb/">Feedback</a>&nbsp;&nbsp;
-<a href="http://my.opera.com/Fr0sT/blog/">Announces (blog)</a>
+<a href="/changelog.html">%sChangelog%</a>&nbsp;&nbsp;
+<a href="https://addons.opera.com/addons/extensions/details/hotkeybb/">%sFeedback%</a>&nbsp;&nbsp;
+<a href="http://my.opera.com/Fr0sT/blog/">%sAnn%</a>
 </div>
 
 <header>
-	<img src="images/icon.png">
+	<img src="/images/icon.png">
 	<h1 id="widget-name"></h1>
-	<h2>Preferences</h2>
+	<h2>%sPref%</h2>
 </header>
-
-<script src="options/options.js"></script>
 
 <section>
 	<fieldset>
-	<legend>What is HotkeyBB?</legend>
+	<legend>%sWhatsTitle%</legend>
 	<p id="widget-description"></p>
-	<p>HotkeyBB is intended for usage in forum/blog/guestbook reply fields. With HotkeyBB you can insert BB-code tags as fast as lightning not depending on BB-code buttons provided. You may simply insert BB-code tag pair or surround the selected text. Complicated tags with option (like [tag=&quot;option&quot;]text[/tag]) are also supported. Depending on tag properties, you'll be prompted for option value or the selected text will be used as option.</p>
-	<p>HotkeyBB also supports URL-based site-specific options. You may adjust some tag insertion options according to the site requirements. Available options include: quote mode for tag option, tag bracket style (BB-code or HTML) and tag case.</p>
-	<p><b>Warning!</b> Extension intersepts ALL shortcuts including standard ones, so beware of defining such combinations as Ctrl-Z, Ctrl-X, Ctrl-C, Ctrl-V, Ctrl-A. However this happens only when input focus is within a textarea; when it isn't, shortcuts are working as usual.</p>
+	<p>%sWhatsPar1%</p>
+	<p>%sWhatsPar2%</p>
+	<p>%sWhatsPar3%</p>
 	</fieldset>
 
 	<fieldset>
-	<legend>Site options</legend>
-	<p>You may adjust some tag insertion options according to the web engine requirements.</p>
+	<legend>%sSiteOptsTitle%</legend>
+	<p>%sSiteOptsDescr%</p>
 	<p>
 		<ul>
-			<li>Quotes — whether tag options should be surrounded by quotes</li>
-			<li>HTML tag — use HTML-style tags ( &lt;&gt; ) instead of BB-code ( [] )</li>
-			<li>Tag upper case — insert tags in upper case</li>
+			<li>%sSiteOptsItem1%</li>
+			<li>%sSiteOptsItem2%</li>
+			<li>%sSiteOptsItem3%</li>
 		</ul>
 	</p>
-	<h3>Default site options</h3>
+	<h3>%sDefSiteOptsTitle%</h3>
 	<p>
 		<table border="1" width="100%" id="DefaultSiteOpts">
 			<thead>
 				<tr>
-					<th width="30%">Quotes</th>
-					<th width="30%">HTML tag</th>
-					<th>Tags upper case</th>
+					<th width="30%">%sQuotesHdr%</th>
+					<th width="30%">%sHTMLTagHdr%</th>
+					<th>%sTagUpCaseHdr%</th>
 				</tr>
 			</thead>
 			<tbody align="center">
@@ -62,23 +71,23 @@
 		</table>
 	</p>
 
-	<h3>Site-specific options</h3>
-	<p>URL — base site address without protocol prefix ("http://")</p>
+	<h3>%sSiteSpecTitle%</h3>
+	<p>%sSiteSpecDescr%</p>
 	<p>
 		<table border="1" width="100%" id="TableSiteOpts">
 			<thead>
 				<tr>
 					<th></th>
-					<th>URL</th>
-					<th width="20%">Quotes</th>
-					<th width="20%">HTML tag</th>
-					<th width="20%">Tags upper case</th>
+					<th>%sURLHdr%</th>
+					<th width="20%">%sQuotesHdr%</th>
+					<th width="20%">%sHTMLTagHdr%</th>
+					<th width="20%">%sTagUpCaseHdr%</th>
 				</tr>
 			</thead>
 			<tbody align="center">
 				<!-- Invisible pattern row -->
 				<tr style="display: none">
-					<td><button title="Delete option" onclick="deleteRow(this)"><b>X</b></button></td>
+					<td><button title="%sDelOpt%" onclick="deleteRow(this)"><b>X</b></button></td>
 					<td><input type="text" name="URL"></td>
 					<td><input type="checkbox" name="Quotes"></td>
 					<td><input type="checkbox" name="HTMLTag"></td>
@@ -88,20 +97,20 @@
 		</table>
 	</p>
 	<p>
-		<button title="Add site option" onclick="addRow('TableSiteOpts')"><b>+</b></button>
+		<button title="%sAddSiteOpt%" onclick="addRow('TableSiteOpts')"><b>+</b></button>
 	</p>
 	</fieldset>
 
 	<fieldset>
-	<legend>Tag list</legend>
-	<p>Here's the list of all tags available. You may delete any of them and add new ones.</p>
+	<legend>%sTagListTitle%</legend>
+	<p>%sTagListDescr%</p>
 	<p>
 		<ul>
-			<li>Open tag — opening tag</li>
-			<li>Close tag — closing tag; could be the same as opening, null (like [tag=&quot;option&quot;]) or custom</li>
-			<li>Option — tag has an option (like [tag=&quot;option&quot;]text[/tag])</li>
-			<li>Sel to option — selected text would be used as option</li>
-			<li>Hotkey — key combination which will insert the tag</li>
+			<li>%sTagListItem1%</li>
+			<li>%sTagListItem2%</li>
+			<li>%sTagListItem3%</li>
+			<li>%sTagListItem4%</li>
+			<li>%sTagListItem5%</li>
 		</ul>
 	</p>
 	<p>
@@ -109,23 +118,23 @@
 			<thead align="center">
 				<tr>
 					<th></th>
-					<th>Open tag</th>
-					<th>Close tag</th>
-					<th>Option</th>
-					<th>Sel to option</th>
-					<th>Hotkey</th>
+					<th>%sOpenTag%</th>
+					<th>%sCloseTag%</th>
+					<th>%sOption%</th>
+					<th>%sSelToOpt%</th>
+					<th>%sHotkey%</th>
 				</tr>
 			</thead>
 			<tbody align="center">
 				<!-- Invisible pattern row -->
 				<tr style="display: none">
-					<td><button title="Delete hotkey" onclick="deleteRow(this)"><b>X</b></button></td>
+					<td><button title="%sDelHK%" onclick="deleteRow(this)"><b>X</b></button></td>
 					<td><input type="text" maxlength="10" size="10" name="OpenTag"></td>
 					<td>
 						<select name="CloseTag" onchange="closeTagCBChange(this)">
-						<option label="= Open">0</option>
-						<option label="[None]">1</option>
-						<option label="Enter...">2</option>
+						<option label="%sAsOpen%">0</option>
+						<option label="%sNone%">1</option>
+						<option label="%sEnter%">2</option>
 						</select>
 					</td>
 					<td><input type="checkbox" name="HasOption"></td>
@@ -142,7 +151,7 @@
 		</table>
 	</p>
 	<p>
-		<button title="Add tag" onclick="addRow('TableTags')"><b>+</b></button>
+		<button title="%sAddTag%" onclick="addRow('TableTags')"><b>+</b></button>
 	</p>
 	</fieldset>
 
@@ -150,7 +159,7 @@
 
 <footer>
 	<p id="footer-text"></p>
-	<p><button class="footer-button" onclick="guiToSettings();window.close()">Save and close</button></p>
+	<p><button class="footer-button" onclick="guiToSettings();window.close()">%sSavenClose%</button></p>
 </footer>
 
 </body>

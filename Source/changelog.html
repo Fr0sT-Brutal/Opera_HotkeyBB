@@ -6,28 +6,47 @@
 
 <!DOCTYPE html>
 <meta charset="utf-8">
-<link rel="stylesheet" href="options/options.css">
+<link rel="stylesheet" href="/options/options.css">
 
-<title id="widget-title"></title>
+<head>
+	<title id="widget-title"></title>
+	<script src="/includes/strings.js"></script>
+	<script src="/includes/localize.js"></script>
+	<script>
+		window.addEventListener("DOMContentLoaded", 
+		                        function() {document.body.innerHTML=localize(document.body.innerHTML)});	
+	</script>
+	<script src="/options/changelog.js"></script>
+</head>
+
 <body>
 
 <div id="links">
-<a href="https://addons.opera.com/addons/extensions/details/hotkeybb/">Feedback</a>&nbsp;&nbsp;
-<a href="http://my.opera.com/Fr0sT/blog/">Announces (blog)</a>
+<a href="https://addons.opera.com/addons/extensions/details/hotkeybb/">%sFeedback%</a>&nbsp;&nbsp;
+<a href="http://my.opera.com/Fr0sT/blog/">%sAnn%</a>
 </div>
 
 <header>
-	<img src="images/icon.png">
+	<img src="/images/icon.png">
 	<h1 id="widget-name"></h1>
-	<h2>Changelog</h2>
+	<h2>%sChangelog%</h2>
 </header>
-
-<script src="options/changelog.js"></script>
 
 <section>
 	<fieldset>
-	<legend>Version history</legend>
-	<div id="log"></div>
+	<legend>%sVersHist%</legend>
+	<div id="log">
+	<!-- Invisible pattern -->
+	<div style="display:none" >
+		<h3><h3>
+		<h4>%sVerHilites%</h4>
+		<ul>
+		</ul>
+		<h4>%sVerChanges%</h4>
+		<div></div>
+		<hr>	
+	</div>
+	</div>
 	</fieldset>
 </section>
 
