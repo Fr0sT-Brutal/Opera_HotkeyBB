@@ -9,7 +9,7 @@
         	...
         }
 
-    In scripts, you may obtain localized strings in the following form: locStrings["sMyText"]
+    In scripts, you may obtain localized strings in the following form: locStrings.sMyText
 */
 
 // Insert local strings into text pattern (text with %sSmth% placeholders)

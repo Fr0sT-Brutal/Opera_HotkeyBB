@@ -157,8 +157,20 @@
 
 </section>
 
+<section>
+	<fieldset>
+	<legend>%sOptActions%</legend>
+	<table>
+		<tr><td><button style="width:100%" onclick="exportSettings()">%sExportSett%</button></td><td>%sExportSettDescr%</td></tr>
+		<tr><td><button style="width:100%" onclick="importSettings(false)">%sImportSett%</button></td><td>%sImportSettDescr%</td></tr>
+		<tr><td><button style="width:100%" onclick="importSettings(true)">%sMergeSett%</button></td><td>%sMergeSettDescr%</td></tr>
+		<input type="file" id="imp_fileselect" style="visibility:hidden">
+	</table>
+	</fieldset>
+</section>
+
 <footer>
-	<p id="footer-text"></p>
+	<p id="footer-text"/>
 	<p><button class="footer-button" onclick="guiToSettings();window.close()">%sSavenClose%</button></p>
 </footer>
 

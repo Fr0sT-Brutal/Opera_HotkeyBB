@@ -11,13 +11,15 @@ var changeLog =
 		highlights:
 		[
 			"Localization support, Russian socalization added",
-			"Partial urls in site options — now you can match all possible subdomains, like twitter.*"
+			"Partial urls in site options — now you can match all possible subdomains, like twitter.*",
+			"Export, import and merge the settings",
 		],
 		changes:
 		[
 			"+ Localization support",
 			"+ Partial urls in site options",
-			
+			"* Prefs page: looks a little nicer (checkboxes, comboboxes, edits)",
+			"+ Export, import and merge the settings",			
 		]
 	},
 

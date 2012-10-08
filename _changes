@@ -1,19 +1,27 @@
 TO-DO
-* version check
-* checkboxes on Linux - ?
-* import/export
-*? toolbar button and popup with site-personal settings
-*? copyrights to Prefs page
-* more pretty checkboxes
-* localize hotkeybb.js (using Localization in scripts)?
-* hotkeys for custom actions (user js functions will be executed)
-* save and close
-* debug hotkey: show current url (and other props - full url, site opts, ...)
-* find real subdomain cases!
+	IMPORTANT
+		* import/export
+		* debug hotkey: show current url (and other props - full url, site opts, ...)
+		* context menu
+	
+	EASY
+		* copyrights on Prefs page
+		* find real subdomain cases!
+	
+	?
+		* save and close - window.close() not working?
+		* localize hotkeybb.js (using Localization in scripts)?
+		* checkboxes on Linux - ?
+	
+	LOT WORK
+		* hotkeys for custom actions (user js functions will be executed)
+		*? toolbar button and popup with site-personal settings
 
 1.5
-* Localization support, Russian socalization added
-* Partial urls in site options
++ Localization support, Russian socalization added
++ Partial urls in site options
+* Prefs page: looks a little nicer (checkboxes, comboboxes, edits)
++ Export, import and merge the settings
 
 1.4
 * Filter the key combinations with modifiers only earlier
@@ -27,6 +35,7 @@ TO-DO
 * Empty tags are not saved
 * Removed TableId array
 + Editable closing tags
++ version check
 
 1.3
 + Global "Quote mode" option

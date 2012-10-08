@@ -87,7 +87,7 @@ function HKBB_OnKeyDown(ev)
 	var quote        = (HKBB_SiteOptions & OPT_QUOTES)  != 0 ? '"' : '';
 	var openBracket  = (HKBB_SiteOptions & OPT_HTMLTAG) != 0 ? '<' : '[';
 	var closeBracket = (HKBB_SiteOptions & OPT_HTMLTAG) != 0 ? '>' : ']';
-alert(HKBB_SiteOptions);
+
 	// construct the tags
 	var opentag = openBracket + 
 	              ((HKBB_SiteOptions & OPT_TAGUPCASE) != 0 ? currtag.Open.toUpperCase() : currtag.Open ) +

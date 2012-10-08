@@ -43,7 +43,7 @@ function closeTagCBChange(cb)
 	// request for tag
 	if (cb.selectedIndex == OPTION_ENTER)
 	{
-		var closeTag = prompt(locStrings["sEnterTag"], "");
+		var closeTag = prompt(locStrings.sEnterTag, "");
 		if (closeTag == null || closeTag == "")
 			cb.selectedIndex = OPTION_NONE;
 		else
@@ -52,7 +52,7 @@ function closeTagCBChange(cb)
 	// return default value
 	else
 	{
-		cb.options[OPTION_ENTER].label = locStrings["sEnter"];
+		cb.options[OPTION_ENTER].label = locStrings.sEnter;
 	}
 }
 
@@ -74,6 +74,10 @@ var HKBB_DefSiteOptions = DEFOPTIONS;
 
 /* GUI <-> SETTINGS STUFF */
 
+var useFileApi = false;
+var mergeMode = false; // if true, imported settings will be merged with current;
+                       // if false, they will replace current
+
 // recursively searches for a child node with specified name
 function getChildByName(parent, childName)
 {
@@ -92,13 +96,22 @@ function getChildByName(parent, childName)
 }
 
 // copies current settings to GUI controls
-function settingsToGui()
+function settingsToGui(tmp)
 {
 	// fill default site options
 	DefOpsRow = document.getElementById("DefaultSiteOpts").tBodies[0].rows[0];
 	getChildByName(DefOpsRow, "Quotes").checked       = ((HKBB_DefSiteOptions & OPT_QUOTES) != 0);
 	getChildByName(DefOpsRow, "HTMLTag").checked      = ((HKBB_DefSiteOptions & OPT_HTMLTAG) != 0);
 	getChildByName(DefOpsRow, "TagUpCase").checked    = ((HKBB_DefSiteOptions & OPT_TAGUPCASE) != 0);
+
+	// clear tables
+	var tbl;
+	tbl = document.getElementById("TableSiteOpts");
+	for (var i = tbl.tBodies[0].rows.length; i > 1; i--)
+		tbl.deleteRow(i);
+	tbl = document.getElementById("TableTags");
+	for (var i = tbl.tBodies[0].rows.length; i > 1; i--)
+		tbl.deleteRow(i);
 
 	// fill site options table
 	for (var url in HKBB_SiteOptions)
@@ -201,6 +214,117 @@ function guiToSettings()
 	opera.extension.postMessage("HKBB_Load_Settings");
 }
 
+// user selected a file in Open file dialog
+function handleFileSelect(ev)
+{
+	importSettings(ev.target.files[0]);
+}
+
+// export whole settings to a new window
+function exportSettings()
+{
+	var settStr = JSON.stringify(widget.preferences);
+	window.open("data:text/plain;,"+escape(settStr));
+}
+
+// import settings from a file if File IO available or from textarea otherwise
+// param could be:
+//    Boolean - merge mode - whether replace current settings or mix with them. This param is used during 1st call only
+//    Object - file to import - object of type File. This param is used during 2nd call only
+//    Object - FileReader.onload event. This param is used during 3rd call only
+function importSettings(param)
+{
+	var settStr;
+	
+	// if File API used, this function is called three times with different parameter types
+	if (useFileApi)
+	{
+		// if param is FileReader.onload event, change it to event.target.result
+		// it will be the string loaded
+		if (param instanceof Event)
+			param = param.target.result;
+	
+		switch (typeof param)
+		{
+			case "boolean": // 1st call - launch file selection dialog or prompt for settings
+				mergeMode = param;
+				if (!mergeMode)
+					if (!confirm(locStrings.sImpAreUSure))
+						return;
+				var selFiles = document.getElementById("imp_fileselect");
+				selFiles.addEventListener('change', handleFileSelect, false);
+				selFiles.click();
+				return;
+			case "object": // 2nd call (file selected) - read the file
+				var reader = new FileReader();
+				reader.onload = importSettings;
+				reader.onerror = function(e) {alert(locStrings.sImpTip);}
+				reader.readAsText(param);
+				return;			
+			case "string": // 3rd call (file read) - assign the text read to the variable
+				settStr = param;
+				break;
+		} // switch
+	}
+	else
+	{
+		settStr = prompt(locStrings.sImpTip, "");
+	}	
+	
+	// parse text and do the job
+	if (settStr == undefined || settStr == "") return;
+	try
+	{
+		var newSett = JSON.parse(settStr);
+		if (mergeMode)
+		{
+			guiToSettings(); // ! save any unsaved modifications
+			
+			// merge tags
+			var newTags = JSON.parse(newSett.StdTags);
+			for (var tag in newTags)
+			{
+				var found = false;
+				for (var tag1 in HKBB_Tags)
+					if (HKBB_Tags[tag1].Open == newTags[tag].Open)
+					{
+						found = true;
+						break;
+					}
+				// tag not found in current settings, add it
+				if (!found)
+				{
+					HKBB_Tags.push(newTags[tag]);
+				}
+			}
+			// save to settings
+			widget.preferences["StdTags"] = JSON.stringify(HKBB_Tags);
+
+			// merge site options
+			var newSiteOptions = JSON.parse(newSett.SiteOptions);
+			for (var url in newSiteOptions)
+			{
+				if (!(url in HKBB_SiteOptions))
+					HKBB_SiteOptions[url] = newSiteOptions[url];
+			}
+			// save to settings
+			widget.preferences["SiteOptions"] = JSON.stringify(HKBB_SiteOptions);
+		}
+		else
+		{
+			widget.preferences = newSett;
+		}
+		// command the injected script to reload settings
+		opera.extension.postMessage("HKBB_Load_Settings");
+		// redraw
+		settingsToGui();
+	}
+	catch (e)
+	{
+		alert(locStrings.sImpErr + "\n" + e.message);
+	}
+}
+
 // prepare GUI stuff
 window.addEventListener("DOMContentLoaded",
 function()
@@ -214,6 +338,8 @@ function()
 	footerp.innerHTML =
 		widget.name + " <b>" + widget.version + "</b> &copy; " + 
 		"<a href=\"mailto:" + widget.authorEmail + "\" title=\"Email " + widget.author + "\">" + widget.author + "</a>";
+
+	useFileApi = (FileReader !== undefined);
 
 	// Load preferences from storage - catch exceptions if values are undefined
 	try {
