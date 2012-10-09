@@ -10,7 +10,7 @@ var locStrings =
 	sPref: "Preferences",
 	sWhatsTitle: "What is HotkeyBB?",
 	sWhatsPar1: "HotkeyBB is intended for usage in forum/blog/guestbook reply fields. With HotkeyBB you can insert BB-code tags as fast as lightning not depending on BB-code buttons provided. You may simply insert BB-code tag pair or surround the selected text. Complicated tags with option (like [tag=&quot;option&quot;]text[/tag]) are also supported. Depending on tag properties, you'll be prompted for option value or the selected text will be used as option.",
-	sWhatsPar2: 'HotkeyBB also supports URL-based site-specific options. You may adjust some tag insertion options according to the site requirements. Available options include: quote mode for tag option, tag bracket style (BB-code or HTML) and tag case.',
+	sWhatsPar2: "HotkeyBB also supports URL-based site-specific options. You may adjust some tag insertion options according to the site requirements. Available options include: quote mode for tag option, tag bracket style (BB-code or HTML) and tag case.",
 	sWhatsPar3: "<strong>Warning!</strong> Extension intersepts ALL shortcuts including standard ones, so beware of defining such combinations as Ctrl-Z, Ctrl-X, Ctrl-C, Ctrl-V, Ctrl-A. However this happens only when input focus is within a textarea; when it isn't, shortcuts are working as usual.",
 	sSiteOptsTitle: "Site options",
 	sSiteOptsDescr: "You may adjust some tag insertion options according to the web engine requirements.",
