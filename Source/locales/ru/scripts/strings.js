@@ -23,7 +23,7 @@ var locStrings =
 	sHTMLTagHdr: "HTML тег",
 	sTagUpCaseHdr: "Теги заглавными",
 	sSiteSpecTitle: "Персональные настройки сайтов",
-	sSiteSpecDescr: "URL — базовый адрес сайта без префикса протокола (\"http://\" и т.д.).</br><strong>Внимание!</strong> Можно использовать маски для субдоменов, напр.: *.diary.ru — захватит john.diary.ru, mary.diary.ru и все остальные; google.* — захватит google.ru, google.com и все остальные; *.livejournal.* — john.livejournal.com, diego.livejournal.es и все остальные.</br><strong>Прим.</strong> Если настройки сайта не работают, возможно, поле ввода загружается с другого адреса (напр., блоги на blogspot.com). В этом случае установите курсор в поле ввода текста и нажмите отладочное сочетание клавиш: <em>Ctrl + Shift + Alt + F1</em>.",
+	sSiteSpecDescr: "URL — базовый адрес сайта без префикса протокола (\"http://\" и т.д.).</br><strong>Внимание!</strong> Можно использовать маски для субдоменов, напр.: *.diary.ru — захватит john.diary.ru, mary.diary.ru и все остальные; google.* — захватит google.ru, google.com и все остальные; *.livejournal.* — john.livejournal.com, diego.livejournal.es и все остальные.</br><strong>Прим.</strong> Если настройки сайта не работают, возможно, поле ввода загружается с другого адреса (напр., блоги на blogspot.com). В этом случае установите курсор в поле ввода текста и нажмите отладочное сочетание клавиш: <em>Ctrl+Shift+Alt+F1</em>.",
 	sDelOpt: "Удалить опцию",
 	sAddSiteOpt: "Добавить опцию сайта",
 	sTagListTitle: "Список тегов",
@@ -43,7 +43,7 @@ var locStrings =
 	sNone: "[Нет]",
 	sEnter: "Ввести…",
 	sAddTag: "Добавить тег",
-	sOptActions: "Действия с настройками",
+	sSettActions: "Действия с настройками",
 	sExportSett: "Экспорт",
 	sExportSettDescr: "Сохранить текущие настройки HotkeyBB в текстовый файл",
 	sImportSett: "Импорт",
@@ -61,5 +61,16 @@ var locStrings =
 	sVer: "Ver.",
 	sVerChanges: "Все изменения:",
 // Script messages
-	sEnterTag: "Введите непустой закрывающий тег"
+	sEnterTag: "Введите непустой закрывающий тег",
+// Injected script messages
+	sEnterTagOption: "Введите параметр для тега <tag>.\nНажмите Отмена, чтобы вставить тег без параметра.",
+	sDebugMsg: "Отладочные данные HotkeyBB.\n"+
+	           "Текущий URL: <url>\n"+
+	           "Домен: <domain>\n"+
+	           "Опции сайта:\n"+
+	           "   Кавычки <quotes>\n"+
+	           "   HTML теги <tags>\n"+
+	           "   Теги заглавными <upcase>",
+	sOn: "ВКЛ",
+	sOff: "ОТКЛ"
 }

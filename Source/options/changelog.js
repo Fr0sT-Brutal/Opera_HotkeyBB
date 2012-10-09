@@ -10,7 +10,7 @@ var changeLog =
 		version: "1.5",
 		highlights:
 		[
-			"Localization support, Russian socalization added",
+			"Localization support, Russian localization added",
 			"Partial urls in site options — now you can match all possible subdomains, like twitter.*",
 			"Export, import and merge the settings",
 			"Debug hotkey: show current url, domain, site opts. Intended for tracking cases when text areas are loaded into iframes from other addresses",

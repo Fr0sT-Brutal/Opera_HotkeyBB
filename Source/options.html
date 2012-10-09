@@ -11,9 +11,10 @@
 
 <head>
 	<title id="widget-title"></title>
-	<script src="/includes/strings.js"></script>
-	<script src="/includes/localize.js"></script>
 	<script>
+		// get local copy of global localization strings
+		var locStrings = opera.extension.bgProcess.locStrings;
+		var localize = opera.extension.bgProcess.localize;
 		window.addEventListener("DOMContentLoaded", 
 		                        function() {document.body.innerHTML=localize(document.body.innerHTML)});	
 	</script>
@@ -159,7 +160,7 @@
 
 <section>
 	<fieldset>
-	<legend>%sOptActions%</legend>
+	<legend>%sSettActions%</legend>
 	<table>
 		<tr><td><button style="width:100%" onclick="exportSettings()">%sExportSett%</button></td><td>%sExportSettDescr%</td></tr>
 		<tr><td><button style="width:100%" onclick="importSettings(false)">%sImportSett%</button></td><td>%sImportSettDescr%</td></tr>

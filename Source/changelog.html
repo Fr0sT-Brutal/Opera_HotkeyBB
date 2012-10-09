@@ -10,9 +10,10 @@
 
 <head>
 	<title id="widget-title"></title>
-	<script src="/includes/strings.js"></script>
-	<script src="/includes/localize.js"></script>
 	<script>
+		// get local copy of global localization strings
+		var locStrings = opera.extension.bgProcess.locStrings;
+		var localize = opera.extension.bgProcess.localize;
 		window.addEventListener("DOMContentLoaded", 
 		                        function() {document.body.innerHTML=localize(document.body.innerHTML)});	
 	</script>

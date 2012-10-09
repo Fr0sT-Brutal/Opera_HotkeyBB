@@ -23,7 +23,7 @@ var locStrings =
 	sHTMLTagHdr: "HTML tag",
 	sTagUpCaseHdr: "Tags upper case",
 	sSiteSpecTitle: "Site-specific options",
-	sSiteSpecDescr: "URL — base site address without protocol prefix (\"http://\").</br> <strong>Attention!</strong> You can use wildcards for subdomains, ex.: *.diary.ru — matches john.diary.ru, mary.diary.ru and all the others; google.* — matches google.ru, google.com and all the others; *.livejournal.* — matches john.livejournal.com, diego.livejournal.es and all the others.</br><strong>Note</strong> If site options won't work, the text input field is probably loaded from other address (for ex., blogspot.com blogs). In this case set focus to text input field and press debug hotkey: <em>Ctrl + Shift + Alt + F1</em>.",
+	sSiteSpecDescr: "URL — base site address without protocol prefix (\"http://\").</br> <strong>Attention!</strong> You can use wildcards for subdomains, ex.: *.diary.ru — matches john.diary.ru, mary.diary.ru and all the others; google.* — matches google.ru, google.com and all the others; *.livejournal.* — matches john.livejournal.com, diego.livejournal.es and all the others.</br><strong>Note</strong> If site options won't work, the text input field is probably loaded from other address (for ex., blogspot.com blogs). In this case set focus to text input field and press debug hotkey: <em>Ctrl+Shift+Alt+F1</em>.",
 	sDelOpt: "Delete option",
 	sAddSiteOpt: "Add site option",
 	sTagListTitle: "Tag list",
@@ -43,7 +43,7 @@ var locStrings =
 	sNone: "[None]",
 	sEnter: "Enter…",
 	sAddTag: "Add tag",
-	sSettActions: "Options actions",
+	sSettActions: "Settings actions",
 	sExportSett: "Export",
 	sExportSettDescr: "Save current HotkeyBB settings into text file",
 	sImportSett: "Import",
@@ -61,5 +61,16 @@ var locStrings =
 	sVerHilites: "Version highlites:",
 	sVerChanges: "Version changes:",
 // Script messages
-	sEnterTag: "Enter non-empty closing tag"
+	sEnterTag: "Enter non-empty closing tag",
+// Injected script messages
+	sEnterTagOption: "Enter an option for the tag <tag>.\nCancel this box to omit option",
+	sDebugMsg: "HotkeyBB debug info.\n"+
+	           "Current URL: <url>\n"+
+	           "Domain: <domain>\n"+
+	           "Site options:\n"+
+	           "   Quotes <quotes>\n"+
+	           "   HTML tags <tags>\n"+
+	           "   Tag uppercase <upcase>",
+	sOn: "ON",
+	sOff: "OFF"
 }

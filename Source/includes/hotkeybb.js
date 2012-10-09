@@ -45,6 +45,20 @@ var HKBB_SiteOptions;            // Option set for current site. Simple integer 
 var HKBB_EvHandled = false;
 var HKBB_DefSiteOptions = DEFOPTIONS;
 var currUrl;
+var locStrings = null;
+
+// Inserts values into string with patterns
+// insPattern("Extension <extname> is <extprop>!", {extname: "HotkeyBB", extprop: "awesome"}) =>
+// "Extension HotkeyBB is awesome!"
+function insPattern(text, values)
+{
+	return text.replace(/<(\w*)>/g,
+	                    function(str, code)
+                        {
+                             var res = values[code];
+                             return (res == undefined) ? str: res;
+                        });
+}
 
 function HKBB_OnKeyDown(ev)
 {
@@ -67,14 +81,13 @@ function HKBB_OnKeyDown(ev)
 	// check for debug hotkey
 	if (evMods == DEBUGHK_MODS && ev.keyCode == DEBUGHK_KEY)
 	{
-		alert("HotkeyBB debug info.\n"+
-		      "Current URL: "+document.URL+"\n"+
-		      "Domain: "+currUrl+"\n"+
-		      "Site options:\n"+
-		      "   Quotes "+( (HKBB_SiteOptions & OPT_QUOTES != 0) ? "ON" : "OFF")+"\n"+
-		      "   HTML tags "+( (HKBB_SiteOptions & OPT_HTMLTAG != 0) ? "ON" : "OFF")+"\n"+
-		      "   Tag uppercase "+( (HKBB_SiteOptions & OPT_TAGUPCASE != 0) ? "ON" : "OFF")
-		);
+		alert(insPattern(locStrings.sDebugMsg, 
+                		 {url:   document.URL,
+                		 domain: currUrl,
+                		 quotes: ((HKBB_SiteOptions & OPT_QUOTES != 0) ? locStrings.sOn : locStrings.sOff),
+                		 tags:   ((HKBB_SiteOptions & OPT_HTMLTAG != 0) ? locStrings.sOn : locStrings.sOff),
+                		 upcase: ((HKBB_SiteOptions & OPT_TAGUPCASE != 0) ? locStrings.sOn : locStrings.sOff)
+                		 }));
 		HKBB_EvHandled = true;
 		return true;
 	}
@@ -99,8 +112,7 @@ function HKBB_OnKeyDown(ev)
 			SelText = ""; // we moved selected text to option, text inside the tag pair will be empty
 		}
 		else
-			Option = prompt("Enter an option for the tag " + currtag.Open.toUpperCase() + "\n" +
-			                "Cancel this box to omit option", "");
+			Option = prompt(insPattern(locStrings.sEnterTagOption, {tag: currtag.Open.toUpperCase()}), "");
 
 	// consider site-specific options
 	var quote        = (HKBB_SiteOptions & OPT_QUOTES)  != 0 ? '"' : '';
@@ -145,45 +157,59 @@ function HKBB_OnKeyDown(ev)
 opera.extension.addEventListener("message",
 function(ev)
 {
-	if (ev.data == "HKBB_Load_Settings")
+	var loadSettings = false;
+	
+	// Page is loading, init ourselves (for now, just copy localization strings)
+	if (typeof(ev.data) == "object")
 	{
-		// load default site options
-		try {
-			HKBB_DefSiteOptions = parseInt(widget.preferences["DefaultSiteOpts"]);
-		} catch(e) {}
-
-		// load tag data
-		try {
-			HKBB_Tags = JSON.parse(widget.preferences["StdTags"]);
-		} catch(e) {}
-		
-		// load site-specific data. SiteOptions might be undefined!
-		try {
-			var SiteOptions = JSON.parse(widget.preferences["SiteOptions"]);
-			// extract current URL (domain name and 1st level domain only) and get option set for it
-			currUrl = /(https?:\/\/|file:\/\/)?(www\.)?([^\/]+)[\/]/.exec(document.URL)[3];
-			// search for site option that contain current URL
-			if (currUrl !== undefined)
-			{
-				for (var url in SiteOptions)
-				{
-					// convert "*.domain.com" URL into RE
-					var rePatt=("^"+url+"$").replace(/\./g, "\\.").replace(/\*/g, ".*");
-					// check the current URL
-					if (new RegExp(rePatt).test(currUrl))
-					{
-						HKBB_SiteOptions = SiteOptions[url];
-						break;
-					}
-				}			
-			}
-		} catch(e) {}
-		// if HKBB_SiteOptions is null or undefined (no option set for current URL) - set defaults
-		if (HKBB_SiteOptions == undefined)
+		if (ev.data.msg == "HKBB_Init")
 		{
-			HKBB_SiteOptions = HKBB_DefSiteOptions;
+			locStrings = ev.data.locStrings;
+			// now load the settings
+			loadSettings = true;
 		}
+		else return;
 	}
+	// Command from Options page to reload settings
+	else if (typeof(ev.data) == "string" && ev.data == "HKBB_Load_Settings")
+		loadSettings = true;
+	
+	if (!loadSettings) return;
+
+	// load default site options
+	try {
+		HKBB_DefSiteOptions = parseInt(widget.preferences["DefaultSiteOpts"]);
+	} catch(e) {}
+
+	// load tag data
+	try {
+		HKBB_Tags = JSON.parse(widget.preferences["StdTags"]);
+	} catch(e) {}
+	
+	// load site-specific data. SiteOptions might be undefined!
+	try {
+		var SiteOptions = JSON.parse(widget.preferences["SiteOptions"]);
+		// extract current URL (domain name and 1st level domain only) and get option set for it
+		currUrl = /(https?:\/\/|file:\/\/)?(www\.)?([^\/]+)[\/]/.exec(document.URL)[3];
+		// search for site option that contain current URL
+		if (currUrl !== undefined)
+		{
+			for (var url in SiteOptions)
+			{
+				// convert "*.domain.com" URL into RE
+				var rePatt=("^"+url+"$").replace(/\./g, "\\.").replace(/\*/g, ".*");
+				// check the current URL
+				if (new RegExp(rePatt).test(currUrl))
+				{
+					HKBB_SiteOptions = SiteOptions[url];
+					break;
+				}
+			}			
+		}
+	} catch(e) {}
+	// if HKBB_SiteOptions is null or undefined (no option set for current URL) - set defaults
+	if (HKBB_SiteOptions == undefined)
+		HKBB_SiteOptions = HKBB_DefSiteOptions;
 }
 , false);
 

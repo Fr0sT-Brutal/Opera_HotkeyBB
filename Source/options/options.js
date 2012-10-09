@@ -334,8 +334,7 @@ function()
 	document.getElementById("widget-name").textContent = widget.name;
 	document.getElementById("widget-description").textContent = widget.description;
 
-	var footerp = document.getElementById("footer-text");
-	footerp.innerHTML =
+	document.getElementById("footer-text").innerHTML =
 		widget.name + " <b>" + widget.version + "</b> &copy; " + 
 		"<a href=\"mailto:" + widget.authorEmail + "\" title=\"Email " + widget.author + "\">" + widget.author + "</a>";
 

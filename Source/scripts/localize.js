@@ -15,8 +15,15 @@
 // Insert local strings into text pattern (text with %sSmth% placeholders)
 // You may localize any part of page's HTML
 // To localize the whole body:
-//   <body onload="document.body.innerHTML = localize((document.body.innerHTML))"> or
-// 	 window.addEventListener("DOMContentLoaded", function() {document.body.innerHTML=localize(document.body.innerHTML)});
+// <head>
+// 		<script src="/scripts/strings.js"></script>
+// 		<script src="/scripts/localize.js"></script>
+// 		<script>
+// 			window.addEventListener("DOMContentLoaded",
+// 			                        function() {document.body.innerHTML=localize(document.body.innerHTML)});
+// 		</script>
+// 		<script src="/options/options.js"></script>
+// </head>
 // Don't forget to include strings.js and localize.js before any script that uses them
 
 function localize(text)

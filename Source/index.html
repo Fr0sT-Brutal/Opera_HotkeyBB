@@ -1,8 +1,13 @@
 <!--
 	HotkeyBB extension for Opera © Fr0sT
 	
-	Main page that is loaded on extension load
+	Main page that is loaded on extension load.
+	It will host localization stuff also (other extension pages use them via opera.extension.bgProcess)
 -->
 <!DOCTYPE html>
 <meta charset="utf-8">
-<script src="/options/background.js"></script>
+<head>
+	<script src="/scripts/strings.js"></script>
+	<script src="/scripts/localize.js"></script>
+	<script src="/scripts/background.js"></script>
+</head>

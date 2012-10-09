@@ -1,10 +1,12 @@
 TO-DO
 	IMPORTANT
 	
+	EASY
+		* choose whether to use file api or not (combo/checkbox)
+	
 	?
 		* context menu
 		* save and close - window.close() not working?
-		* localize hotkeybb.js (using Localization in scripts)?
 		* checkboxes on Linux - ?
 		* disable hotkeys on certain sites
 	
@@ -14,11 +16,14 @@ TO-DO
 		* customizable debug hotkey
 
 1.5
-+ Localization support, Russian socalization added
++ Localization support, Russian localization added
 + Partial urls in site options
 * Prefs page: looks a little nicer (checkboxes, comboboxes, edits)
 + Export, import and merge the settings
 + Debug hotkey: show current url, domain, site opts. Intended for tracking cases when text areas are loaded into iframes from other addresses
+* Injected script localized also.
+* Changes to localization framework: load it just once on extension load.
+* File structure refactored
 
 1.4
 * Filter the key combinations with modifiers only earlier
