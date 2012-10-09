@@ -13,6 +13,7 @@ var changeLog =
 			"Localization support, Russian socalization added",
 			"Partial urls in site options — now you can match all possible subdomains, like twitter.*",
 			"Export, import and merge the settings",
+			"Debug hotkey: show current url, domain, site opts. Intended for tracking cases when text areas are loaded into iframes from other addresses",
 		],
 		changes:
 		[
@@ -20,6 +21,7 @@ var changeLog =
 			"+ Partial urls in site options",
 			"* Prefs page: looks a little nicer (checkboxes, comboboxes, edits)",
 			"+ Export, import and merge the settings",			
+			"+ Debug hotkey: show current url, domain, site opts",
 		]
 	},
 

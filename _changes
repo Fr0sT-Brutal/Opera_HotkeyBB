@@ -1,27 +1,24 @@
 TO-DO
 	IMPORTANT
-		* import/export
-		* debug hotkey: show current url (and other props - full url, site opts, ...)
-		* context menu
-	
-	EASY
-		* copyrights on Prefs page
-		* find real subdomain cases!
 	
 	?
+		* context menu
 		* save and close - window.close() not working?
 		* localize hotkeybb.js (using Localization in scripts)?
 		* checkboxes on Linux - ?
+		* disable hotkeys on certain sites
 	
 	LOT WORK
 		* hotkeys for custom actions (user js functions will be executed)
 		*? toolbar button and popup with site-personal settings
+		* customizable debug hotkey
 
 1.5
 + Localization support, Russian socalization added
 + Partial urls in site options
 * Prefs page: looks a little nicer (checkboxes, comboboxes, edits)
 + Export, import and merge the settings
++ Debug hotkey: show current url, domain, site opts. Intended for tracking cases when text areas are loaded into iframes from other addresses
 
 1.4
 * Filter the key combinations with modifiers only earlier

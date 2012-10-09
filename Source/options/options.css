@@ -109,10 +109,6 @@ fieldset label {
 	margin-left: 1em;
 }
 
-fieldset *:disabled {
-	opacity: 0.5;
-}
-
 button {
 	border-radius: 3px;
 	border: 1px solid rgba(80,80,130,0.5);
@@ -133,10 +129,6 @@ button:hover {
 button:active {
 	border-color: rgba(80,80,130,0.8);
 	box-shadow: 0 1px 2px rgba(121,153,166,1), inset 1px 1px 1px rgba(121,153,166,0.5);
-}
-
-button:disabled {
-	background: rgba(173,181,217,0.75);
 }
 
 fieldset input {
@@ -165,6 +157,10 @@ fieldset input[type=checkbox] {
 fieldset input[type=checkbox]:active {
 	border-color: rgba(80,80,130,0.8);
 	background-color: #d3dbf5;
+}
+
+fieldset input[type=checkbox]:hover {
+	background-color: #EEF1FB;
 }
 
 fieldset select {

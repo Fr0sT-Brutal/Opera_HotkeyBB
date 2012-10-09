@@ -27,6 +27,9 @@ const OPT_HTMLTAG   = 1 << 1;
 const OPT_TAGUPCASE = 1 << 2;
 // default option set: all features switched off
 const DEFOPTIONS = 0;
+// debug hotkey
+const DEBUGHK_MODS = MOD_CTRL | MOD_ALT | MOD_SHIFT;
+const DEBUGHK_KEY = 112; // F1
 
 /*
 Tag array contains objects with the following fields:
@@ -41,6 +44,7 @@ var HKBB_Tags = [];
 var HKBB_SiteOptions;            // Option set for current site. Simple integer bit map
 var HKBB_EvHandled = false;
 var HKBB_DefSiteOptions = DEFOPTIONS;
+var currUrl;
 
 function HKBB_OnKeyDown(ev)
 {
@@ -59,6 +63,21 @@ function HKBB_OnKeyDown(ev)
 	if (ev.altKey)   evMods = evMods | MOD_ALT;
 	if (ev.ctrlKey)  evMods = evMods | MOD_CTRL;
 	if (ev.shiftKey) evMods = evMods | MOD_SHIFT;
+
+	// check for debug hotkey
+	if (evMods == DEBUGHK_MODS && ev.keyCode == DEBUGHK_KEY)
+	{
+		alert("HotkeyBB debug info.\n"+
+		      "Current URL: "+document.URL+"\n"+
+		      "Domain: "+currUrl+"\n"+
+		      "Site options:\n"+
+		      "   Quotes "+( (HKBB_SiteOptions & OPT_QUOTES != 0) ? "ON" : "OFF")+"\n"+
+		      "   HTML tags "+( (HKBB_SiteOptions & OPT_HTMLTAG != 0) ? "ON" : "OFF")+"\n"+
+		      "   Tag uppercase "+( (HKBB_SiteOptions & OPT_TAGUPCASE != 0) ? "ON" : "OFF")
+		);
+		HKBB_EvHandled = true;
+		return true;
+	}
 
 	// search for the hotkey in our list
 	var currtag = null;
@@ -142,9 +161,9 @@ function(ev)
 		try {
 			var SiteOptions = JSON.parse(widget.preferences["SiteOptions"]);
 			// extract current URL (domain name and 1st level domain only) and get option set for it
-			var currUrl = /(https?:\/\/|file:\/\/)?(www\.)?([^\/]+)[\/]/.exec(document.URL)[3];
-			// search for site option that containt current URL
-			if (currUrl != undefined)
+			currUrl = /(https?:\/\/|file:\/\/)?(www\.)?([^\/]+)[\/]/.exec(document.URL)[3];
+			// search for site option that contain current URL
+			if (currUrl !== undefined)
 			{
 				for (var url in SiteOptions)
 				{

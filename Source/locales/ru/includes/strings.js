@@ -23,7 +23,7 @@ var locStrings =
 	sHTMLTagHdr: "HTML тег",
 	sTagUpCaseHdr: "Теги заглавными",
 	sSiteSpecTitle: "Персональные настройки сайтов",
-	sSiteSpecDescr: "URL — базовый адрес сайта без префикса протокола (\"http://\" и т.д.).</br><strong>Внимание!</strong> Можно использовать маски для субдоменов, напр.: *.blogspot.com — захватит john.blogspot.com, mary.blogspot.com и все остальные; google.* — захватит google.ru, google.com и все остальные; *.livejournal.* — john.livejournal.com, diego.livejournal.es и все остальные.",
+	sSiteSpecDescr: "URL — базовый адрес сайта без префикса протокола (\"http://\" и т.д.).</br><strong>Внимание!</strong> Можно использовать маски для субдоменов, напр.: *.diary.ru — захватит john.diary.ru, mary.diary.ru и все остальные; google.* — захватит google.ru, google.com и все остальные; *.livejournal.* — john.livejournal.com, diego.livejournal.es и все остальные.</br><strong>Прим.</strong> Если настройки сайта не работают, возможно, поле ввода загружается с другого адреса (напр., блоги на blogspot.com). В этом случае установите курсор в поле ввода текста и нажмите отладочное сочетание клавиш: <em>Ctrl + Shift + Alt + F1</em>.",
 	sDelOpt: "Удалить опцию",
 	sAddSiteOpt: "Добавить опцию сайта",
 	sTagListTitle: "Список тегов",
