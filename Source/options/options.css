@@ -47,6 +47,7 @@ a {
 	background-color: rgba(220, 220, 220, 0);
 	border-bottom: 1px solid rgba(80,80,130,0.2);
 	-o-transition: 0.25s;
+	transition: 0.25s;
 }
 
 a:hover {
@@ -119,6 +120,7 @@ button {
 	line-height: 4ex;
 	padding: 0 1em;
 	-o-transition: 0.25s;
+	transition: 0.25s;
 	font: status-bar;
 }
 
@@ -137,6 +139,7 @@ fieldset input {
 	color: #1e3853;
 	font: status-bar;
 	-o-transition: 0.25s;
+	transition: 0.25s;
 	border: 1px solid rgba(80,80,130,0.5);
 }
 
@@ -166,5 +169,4 @@ fieldset input[type=checkbox]:hover {
 fieldset select {
 	border-radius: 3px;
 	font: status-bar;
-	-o-transition: 0.25s;
 }

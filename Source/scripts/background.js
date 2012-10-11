@@ -29,6 +29,7 @@ function(e)
 	                        sOn: locStrings.sOn,
 	                        sOff: locStrings.sOff}
 	                     });
+
 	// check if versions differ
 	if (widget.preferences["Version"] == undefined || widget.preferences["Version"] != widget.version)
 	{
