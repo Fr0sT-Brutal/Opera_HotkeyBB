@@ -33,7 +33,7 @@ var locStrings =
 	sTagListItem3: "<em>Option</em> — tag has an option (like [tag=&quot;option&quot;]text[/tag])",
 	sTagListItem4: "<em>Sel to option</em> — selected text would be used as option",
 	sTagListItem5: "<em>Hotkey</em> — key combination which will insert the tag",
-	sHotkeyWarn: "<strong>Note</strong>. Alt+Key shortcuts won't work because they're considered system combinations (menu item activation).<br/><strong>Note</strong>. HotkeyBB could fail to catch some keystrokes on some OS (Linux, maybe Mac) when non-Latin keyboard layout is active due to Opera bug with event.keyCode (fixed in v.12.10b).",
+	sHotkeyWarn: "<strong>Note</strong>. Alt+Key shortcuts won't work because they're considered system combinations (menu item activation).<br/><strong>Note</strong>. HotkeyBB could fail to catch some keystrokes on some OS (Linux, maybe Mac) when non-Latin keyboard layout is active due to Opera bug with event.keyCode (fixed in Opera 12.10b).",
 	sOpenTag: "Open tag",
 	sCloseTag: "Close tag",
 	sOption: "Option",
@@ -55,7 +55,7 @@ var locStrings =
 	sImpTip: "Paste previously saved settings text into field below and hit OK",
 	sImpAreUSure: "Import will override all current settings! Continue?",
 	sImpErr: "Error importing settings!",
-	sSavenClose: "Save and close",
+	sSaveNClose: "Save and close",
 // Changelog page
 	sVersHist: "Version history",
 	sVer: "Ver.",
@@ -63,6 +63,7 @@ var locStrings =
 	sVerChanges: "Version changes:",
 // Script messages
 	sEnterTag: "Enter non-empty closing tag",
+	sAltHotkeyWarn: "You entered Alt+Key shortcuts for the following tags:\n<tags>\nThese shortcuts are considered system and WON'T work!\nDo you want to fix that?",
 // Injected script messages
 	sEnterTagOption: "Enter an option for the tag <tag>.\nCancel this box to omit option",
 	sDebugMsg: "HotkeyBB debug info.\n"+

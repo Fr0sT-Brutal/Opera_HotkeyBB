@@ -211,7 +211,24 @@ function guiToSettings()
 	widget.preferences["StdTags"] = JSON.stringify(HKBB_Tags);
 
 	// command the injected script to reload settings
-	opera.extension.postMessage("HKBB_Load_Settings");
+	opera.extension.postMessage({msg: "HKBB_Load_Settings"});
+}
+
+// output some warnings on page close if settings are somewhat incorrect
+// returns: TRUE - continue closing, FALSE - cancel closing
+function checkSettings()
+{
+	// check for Alt+Key shortcuts
+	var s = "";
+	for (var tag in HKBB_Tags)
+		if (HKBB_Tags[tag].HKMods == MOD_ALT)
+			s += "*\t" + HKBB_Tags[tag].Open + "\n";
+	if (s != "")
+		if (confirm(locStrings.sAltHotkeyWarn.replace("<tags>", s)))
+			return false;
+	// ...
+	
+	return true;
 }
 
 // user selected a file in Open file dialog
@@ -293,9 +310,7 @@ function importSettings(param)
 					}
 				// tag not found in current settings, add it
 				if (!found)
-				{
 					HKBB_Tags.push(newTags[tag]);
-				}
 			}
 			// save to settings
 			widget.preferences["StdTags"] = JSON.stringify(HKBB_Tags);
@@ -303,10 +318,8 @@ function importSettings(param)
 			// merge site options
 			var newSiteOptions = JSON.parse(newSett.SiteOptions);
 			for (var url in newSiteOptions)
-			{
 				if (!(url in HKBB_SiteOptions))
 					HKBB_SiteOptions[url] = newSiteOptions[url];
-			}
 			// save to settings
 			widget.preferences["SiteOptions"] = JSON.stringify(HKBB_SiteOptions);
 		}
@@ -315,7 +328,7 @@ function importSettings(param)
 			widget.preferences = newSett;
 		}
 		// command the injected script to reload settings
-		opera.extension.postMessage("HKBB_Load_Settings");
+		opera.extension.postMessage({msg: "HKBB_Load_Settings"});
 		// redraw
 		settingsToGui();
 	}
@@ -325,14 +338,27 @@ function importSettings(param)
 	}
 }
 
+// Apply all GUI modifications, check the settings, close page
+function btnCloseClick()
+{
+	guiToSettings();
+	if (!checkSettings()) return;
+	window.close(); // won't work in Opera 11.6x+
+	// we have to do it asyncronously because tabs API is accessible from
+	// backround script only
+	opera.extension.postMessage({msg: "HKBB_Close_Tab"});
+};
+
 // prepare GUI stuff
 window.addEventListener("DOMContentLoaded",
 function()
 {
 	// Set information fields
-	document.getElementById("widget-title").textContent = widget.name;
+	document.getElementById("page-title").textContent = widget.name + " - " + locStrings.sPref;
 	document.getElementById("widget-name").textContent = widget.name;
 	document.getElementById("widget-description").textContent = widget.description;
+	
+	document.getElementById("close-btn").onclick = btnCloseClick;
 
 	document.getElementById("footer-text").innerHTML =
 		widget.name + " <b>" + widget.version + "</b> &copy; " + 

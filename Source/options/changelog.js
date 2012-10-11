@@ -75,7 +75,7 @@ window.addEventListener("DOMContentLoaded",
 function()
 {
 	// Set information fields
-	document.getElementById("widget-title").textContent = widget.name;
+	document.getElementById("page-title").textContent = widget.name + " - " + locStrings.sChangelog;
 	document.getElementById("widget-name").textContent = widget.name;
 	
 	var footerp = document.getElementById("footer-text");

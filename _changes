@@ -1,28 +1,11 @@
-TO-DO
-	IMPORTANT
-	
-	EASY
-		* choose whether to use file api or not (combo/checkbox)
-		* <[tag]text[/tag]> => insert "tag" => <text>
-		* warning when alt+key shortcut is entered
-	
-	?
-		* context menu
-		* save and close - window.close() not working?
-		* icon on Opera 11.6
-		* checkboxes on Linux - ?
-		* disable hotkeys on certain sites
-		* customizable debug hotkey
-		* post the whole locStrings (more memory (?) but easier)
-		* site-specific tag aliases
-	
-	LOT WORK
-		* hotkeys for custom actions (user js functions will be executed)
-		*? toolbar button and popup with site-personal settings
-
 1.6
++ "Save and close" button actually closes Preferences page
 * CSS: "transition" properties added (-o* prefixes are obsolete in Opera 12.50)
 * Added warnings about Alt+Key shortcuts and shortcuts on Linux when non-Latin layout is active (actual up to Opera 12.10)
+* Warning box on Preferences page close when tag(s) with alt+key shortcut(s) present
+* Preferences and Changelog pages have their own titles
+* Messaging changed: always posting objects now
+* Other updates and fixes
 
 1.5
 + Localization support, Russian localization added

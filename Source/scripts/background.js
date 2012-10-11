@@ -8,12 +8,30 @@
 	Inits injected script with localized strings
 */
 
-// Catches messages sent by Preferences page via opera.extension.postMessage
-// and marshals them to all other scripts
+// Catches messages sent via opera.extension.postMessage (generally, by Options page)
 opera.extension.addEventListener("message",
 function(e)
 {
-	opera.extension.broadcastMessage(e.data);
+	switch (e.data.msg)
+	{
+		// Settings must be reloaded - marshal the message to all injected scripts
+		case "HKBB_Load_Settings":
+			opera.extension.broadcastMessage(e.data);
+			break;
+		// close Options page - since window.close() doesn't work, it's the only way
+		case "HKBB_Close_Tab":
+			// Get current wuid from address "widget://wuid-**-**-**/index.html" and 
+			// construct the address of options page
+			try {
+				var optsUrl = "widget://wuid-" + /^widget:\/\/wuid\-([\w\d\-]*)\//.exec(document.URL)[1] + "/options.html";
+			} catch (e) {break}
+			// Search for Options tab among all opened tabs and close it
+			var tabs = opera.extension.tabs.getAll();
+			for (var tab in tabs)
+				if (tabs[tab].url == optsUrl)
+					tabs[tab].close();
+			break;
+	}
 }
 , false);
 

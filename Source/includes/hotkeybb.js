@@ -157,59 +157,52 @@ function HKBB_OnKeyDown(ev)
 opera.extension.addEventListener("message",
 function(ev)
 {
-	var loadSettings = false;
-	
 	// Page is loading, init ourselves (for now, just copy localization strings)
-	if (typeof(ev.data) == "object")
+	if (ev.data.msg == "HKBB_Init")
 	{
-		if (ev.data.msg == "HKBB_Init")
-		{
-			locStrings = ev.data.locStrings;
-			// now load the settings
-			loadSettings = true;
-		}
-		else return;
+		locStrings = ev.data.locStrings;
+		// now load the settings
+		ev.data.msg = "HKBB_Load_Settings";
 	}
+
 	// Command from Options page to reload settings
-	else if (typeof(ev.data) == "string" && ev.data == "HKBB_Load_Settings")
-		loadSettings = true;
+	if (ev.data.msg == "HKBB_Load_Settings")
+	{
+		// load default site options
+		try {
+			HKBB_DefSiteOptions = parseInt(widget.preferences["DefaultSiteOpts"]);
+		} catch(e) {}
 	
-	if (!loadSettings) return;
-
-	// load default site options
-	try {
-		HKBB_DefSiteOptions = parseInt(widget.preferences["DefaultSiteOpts"]);
-	} catch(e) {}
-
-	// load tag data
-	try {
-		HKBB_Tags = JSON.parse(widget.preferences["StdTags"]);
-	} catch(e) {}
-	
-	// load site-specific data. SiteOptions might be undefined!
-	try {
-		var SiteOptions = JSON.parse(widget.preferences["SiteOptions"]);
-		// extract current URL (domain name and 1st level domain only) and get option set for it
-		currUrl = /(https?:\/\/|file:\/\/)?(www\.)?([^\/]+)[\/]/.exec(document.URL)[3];
-		// search for site option that contain current URL
-		if (currUrl !== undefined)
-		{
-			for (var url in SiteOptions)
+		// load tag data
+		try {
+			HKBB_Tags = JSON.parse(widget.preferences["StdTags"]);
+		} catch(e) {}
+		
+		// load site-specific data. SiteOptions might be undefined!
+		try {
+			var SiteOptions = JSON.parse(widget.preferences["SiteOptions"]);
+			// extract current URL (domain name and 1st level domain only) and get option set for it
+			currUrl = /^(https?:\/\/|file:\/\/)?(www\.)?([^\/]+)[\/]/.exec(document.URL)[3];
+			// search for site option that contain current URL
+			if (currUrl !== undefined)
 			{
-				// convert "*.domain.com" URL into RE
-				var rePatt=("^"+url+"$").replace(/\./g, "\\.").replace(/\*/g, ".*");
-				// check the current URL
-				if (new RegExp(rePatt).test(currUrl))
+				for (var url in SiteOptions)
 				{
-					HKBB_SiteOptions = SiteOptions[url];
-					break;
-				}
-			}			
-		}
-	} catch(e) {}
-	// if HKBB_SiteOptions is null or undefined (no option set for current URL) - set defaults
-	if (HKBB_SiteOptions == undefined)
-		HKBB_SiteOptions = HKBB_DefSiteOptions;
+					// convert "*.domain.com" URL into RE
+					var rePatt=("^"+url+"$").replace(/\./g, "\\.").replace(/\*/g, ".*");
+					// check the current URL
+					if (new RegExp(rePatt).test(currUrl))
+					{
+						HKBB_SiteOptions = SiteOptions[url];
+						break;
+					}
+				}		
+			}
+		} catch(e) {}
+		// if HKBB_SiteOptions is null or undefined (no option set for current URL) - set defaults
+		if (HKBB_SiteOptions == undefined)
+			HKBB_SiteOptions = HKBB_DefSiteOptions;
+	}
 }
 , false);
 
