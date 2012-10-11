@@ -275,7 +275,7 @@ function importSettings(param)
 			case "object": // 2nd call (file selected) - read the file
 				var reader = new FileReader();
 				reader.onload = importSettings;
-				reader.onerror = function(e) {alert(locStrings.sImpTip);}
+				reader.onerror = function(err) {alert(locStrings.sImpTip);}
 				reader.readAsText(param);
 				return;			
 			case "string": // 3rd call (file read) - assign the text read to the variable
@@ -332,7 +332,7 @@ function importSettings(param)
 		// redraw
 		settingsToGui();
 	}
-	catch (e)
+	catch (ex)
 	{
 		alert(locStrings.sImpErr + "\n" + e.message);
 	}
@@ -369,13 +369,13 @@ function()
 	// Load preferences from storage - catch exceptions if values are undefined
 	try {
 		HKBB_DefSiteOptions = parseInt(widget.preferences["DefaultSiteOpts"]);
-	} catch (e) {}
+	} catch (ex) {}
 	try {
 		HKBB_Tags = JSON.parse(widget.preferences["StdTags"]);
-	} catch (e) {}
+	} catch (ex) {}
 	try {
 		HKBB_SiteOptions = JSON.parse(widget.preferences["SiteOptions"]);
-	} catch (e) {}
+	} catch (ex) {}
 
 	// Fill GUI controls with values
 	settingsToGui(); 

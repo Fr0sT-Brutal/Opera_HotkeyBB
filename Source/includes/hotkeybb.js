@@ -171,12 +171,12 @@ function(ev)
 		// load default site options
 		try {
 			HKBB_DefSiteOptions = parseInt(widget.preferences["DefaultSiteOpts"]);
-		} catch(e) {}
+		} catch(ex) {}
 	
 		// load tag data
 		try {
 			HKBB_Tags = JSON.parse(widget.preferences["StdTags"]);
-		} catch(e) {}
+		} catch(ex) {}
 		
 		// load site-specific data. SiteOptions might be undefined!
 		try {
@@ -198,7 +198,7 @@ function(ev)
 					}
 				}		
 			}
-		} catch(e) {}
+		} catch(ex) {}
 		// if HKBB_SiteOptions is null or undefined (no option set for current URL) - set defaults
 		if (HKBB_SiteOptions == undefined)
 			HKBB_SiteOptions = HKBB_DefSiteOptions;
@@ -209,22 +209,22 @@ function(ev)
 // We're intercepting ALL events instead of assigning a handler to every textarea 
 // to process dynamically created elements
 window.opera.addEventListener("BeforeEvent",
-function(UserJSEvent)
+function(userJSEvent)
 {
 	// only for textarea elements
-	if (UserJSEvent.event.target instanceof window.HTMLTextAreaElement)
+	if (userJSEvent.event.target instanceof window.HTMLTextAreaElement)
 	{
 		var handled = false;
 		// catch "keydown" & "keypress"
-		if (UserJSEvent.event.type == "keydown")
-			handled = HKBB_OnKeyDown(UserJSEvent.event)
-		else if (UserJSEvent.event.type == "keypress")
+		if (userJSEvent.event.type == "keydown")
+			handled = HKBB_OnKeyDown(userJSEvent.event)
+		else if (userJSEvent.event.type == "keypress")
 			handled = HKBB_EvHandled;
 		// an Event is already handled - so cancel it
 		if (handled)
 		{
-			UserJSEvent.event.stopPropagation();
-			UserJSEvent.event.preventDefault();
+			userJSEvent.event.stopPropagation();
+			userJSEvent.event.preventDefault();
 		}
 	}
 }

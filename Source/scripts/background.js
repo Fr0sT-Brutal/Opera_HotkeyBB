@@ -10,13 +10,13 @@
 
 // Catches messages sent via opera.extension.postMessage (generally, by Options page)
 opera.extension.addEventListener("message",
-function(e)
+function(ev)
 {
-	switch (e.data.msg)
+	switch (ev.data.msg)
 	{
 		// Settings must be reloaded - marshal the message to all injected scripts
 		case "HKBB_Load_Settings":
-			opera.extension.broadcastMessage(e.data);
+			opera.extension.broadcastMessage(ev.data);
 			break;
 		// close Options page - since window.close() doesn't work, it's the only way
 		case "HKBB_Close_Tab":
@@ -24,7 +24,7 @@ function(e)
 			// construct the address of options page
 			try {
 				var optsUrl = "widget://wuid-" + /^widget:\/\/wuid\-([\w\d\-]*)\//.exec(document.URL)[1] + "/options.html";
-			} catch (e) {break}
+			} catch (ex) {break}
 			// Search for Options tab among all opened tabs and close it
 			var tabs = opera.extension.tabs.getAll();
 			for (var tab in tabs)
@@ -37,10 +37,10 @@ function(e)
 
 // Init stuff
 opera.extension.addEventListener("connect",
-function(e)
+function(ev)
 {
 	// Commands the injected script to init and sends it localized strings it uses
-	e.source.postMessage({msg: "HKBB_Init", 
+	ev.source.postMessage({msg: "HKBB_Init", 
 	                      locStrings: {
 	                        sEnterTagOption: locStrings.sEnterTagOption, 
 	                        sDebugMsg: locStrings.sDebugMsg,
