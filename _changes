@@ -6,6 +6,11 @@
 * Preferences and Changelog pages have their own titles
 * Messaging changed: always posting objects now
 * Other updates and fixes
+* Transfer tab address in HKBB_Close_Tab - WUID determination removed
+* Fixed issue: debug message box shows wrong site options
++ Finnish Localization (thanks to Opeeera)
+* Open tag field length limit increased to 40 (some people find rather weird applications for HkBB so they needed more space)
+* Localization patterns change: now {} instead of %%
 
 1.5
 + Localization support, Russian localization added

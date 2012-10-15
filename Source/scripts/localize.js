@@ -1,5 +1,5 @@
 /*
-	Localization routine for Opera extensions Â© Fr0sT
+	Localization routine for Opera extensions © Fr0sT
 
 	You must have strings.js included with local string values inside in the following form:
         var locStrings = // ! do NOT change !
@@ -12,7 +12,7 @@
     In scripts, you may obtain localized strings in the following form: locStrings.sMyText
 */
 
-// Insert local strings into text pattern (text with %sSmth% placeholders)
+// Function inserts local strings into text pattern (text with {sSmth} placeholders)
 // You may localize any part of page's HTML
 // To localize the whole body:
 // <head>
@@ -25,10 +25,9 @@
 // 		<script src="/options/options.js"></script>
 // </head>
 // Don't forget to include strings.js and localize.js before any script that uses them
-
 function localize(text)
 {
-	return text.replace(/%(s\w*)%/g,
+	return text.replace(/\{(s\w*)\}/g,
 	                    function(str, code)
                         {
                              var res = locStrings[code];

@@ -82,11 +82,11 @@ function HKBB_OnKeyDown(ev)
 	if (evMods == DEBUGHK_MODS && ev.keyCode == DEBUGHK_KEY)
 	{
 		alert(insPattern(locStrings.sDebugMsg, 
-                		 {url:   document.URL,
-                		 domain: currUrl,
-                		 quotes: ((HKBB_SiteOptions & OPT_QUOTES != 0) ? locStrings.sOn : locStrings.sOff),
-                		 tags:   ((HKBB_SiteOptions & OPT_HTMLTAG != 0) ? locStrings.sOn : locStrings.sOff),
-                		 upcase: ((HKBB_SiteOptions & OPT_TAGUPCASE != 0) ? locStrings.sOn : locStrings.sOff)
+                		 {url:    document.URL,
+                		  domain: currUrl,
+                		  quotes: ((HKBB_SiteOptions & OPT_QUOTES) ? locStrings.sOn : locStrings.sOff),
+                		  tags:   ((HKBB_SiteOptions & OPT_HTMLTAG) ? locStrings.sOn : locStrings.sOff),
+                		  upcase: ((HKBB_SiteOptions & OPT_TAGUPCASE) ? locStrings.sOn : locStrings.sOff)
                 		 }));
 		HKBB_EvHandled = true;
 		return true;
@@ -115,13 +115,13 @@ function HKBB_OnKeyDown(ev)
 			Option = prompt(insPattern(locStrings.sEnterTagOption, {tag: currtag.Open.toUpperCase()}), "");
 
 	// consider site-specific options
-	var quote        = (HKBB_SiteOptions & OPT_QUOTES)  != 0 ? '"' : '';
-	var openBracket  = (HKBB_SiteOptions & OPT_HTMLTAG) != 0 ? '<' : '[';
-	var closeBracket = (HKBB_SiteOptions & OPT_HTMLTAG) != 0 ? '>' : ']';
+	var quote        = (HKBB_SiteOptions & OPT_QUOTES)  ? '"' : '';
+	var openBracket  = (HKBB_SiteOptions & OPT_HTMLTAG) ? '<' : '[';
+	var closeBracket = (HKBB_SiteOptions & OPT_HTMLTAG) ? '>' : ']';
 
 	// construct the tags
 	var opentag = openBracket + 
-	              ((HKBB_SiteOptions & OPT_TAGUPCASE) != 0 ? currtag.Open.toUpperCase() : currtag.Open ) +
+	              ((HKBB_SiteOptions & OPT_TAGUPCASE) ? currtag.Open.toUpperCase() : currtag.Open ) +
 	              ((Option != null) ? ("="+quote+Option+quote) : "") +
 	              closeBracket;
 	var closetag;
@@ -129,14 +129,14 @@ function HKBB_OnKeyDown(ev)
 	// !!! "== undefined" works both if variable is undefined and null !!!
 	if (currtag.Close == undefined)
 		closetag = openBracket + "/" + 
-		           ((HKBB_SiteOptions & OPT_TAGUPCASE) != 0 ? currtag.Open.toUpperCase() : currtag.Open ) +
+		           ((HKBB_SiteOptions & OPT_TAGUPCASE) ? currtag.Open.toUpperCase() : currtag.Open ) +
 		           closeBracket;
 	// property could be set to empty string to omit a closing tag (e.g. [img=...url...] )
 	else if (currtag.Close == "")
 		closetag = "";
 	else
 		closetag = openBracket + "/" + 
-		           ((HKBB_SiteOptions & OPT_TAGUPCASE) != 0 ? currtag.Close.toUpperCase() : currtag.Close) +
+		           ((HKBB_SiteOptions & OPT_TAGUPCASE) ? currtag.Close.toUpperCase() : currtag.Close) +
 		           closeBracket;
 
 	// insert tags
@@ -157,7 +157,7 @@ function HKBB_OnKeyDown(ev)
 opera.extension.addEventListener("message",
 function(ev)
 {
-	// Page is loading, init ourselves (for now, just copy localization strings)
+	// Page is loading, init (for now, just copy localization strings)
 	if (ev.data.msg == "HKBB_Init")
 	{
 		locStrings = ev.data.locStrings;

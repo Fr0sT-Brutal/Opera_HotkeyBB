@@ -346,7 +346,7 @@ function btnCloseClick()
 	window.close(); // won't work in Opera 11.6x+
 	// we have to do it asyncronously because tabs API is accessible from
 	// backround script only
-	opera.extension.postMessage({msg: "HKBB_Close_Tab"});
+	opera.extension.postMessage({msg: "HKBB_Close_Tab", addr: document.URL});
 };
 
 // prepare GUI stuff

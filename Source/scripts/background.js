@@ -20,15 +20,10 @@ function(ev)
 			break;
 		// close Options page - since window.close() doesn't work, it's the only way
 		case "HKBB_Close_Tab":
-			// Get current wuid from address "widget://wuid-**-**-**/index.html" and 
-			// construct the address of options page
-			try {
-				var optsUrl = "widget://wuid-" + /^widget:\/\/wuid\-([\w\d\-]*)\//.exec(document.URL)[1] + "/options.html";
-			} catch (ex) {break}
-			// Search for Options tab among all opened tabs and close it
+			// Search for tab with given address among all opened tabs and close it
 			var tabs = opera.extension.tabs.getAll();
 			for (var tab in tabs)
-				if (tabs[tab].url == optsUrl)
+				if (tabs[tab].url == ev.data.addr)
 					tabs[tab].close();
 			break;
 	}
