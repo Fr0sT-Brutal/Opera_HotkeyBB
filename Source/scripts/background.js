@@ -5,10 +5,10 @@
 	
 	Inits communication between Options page and the injected script.
 	Checks version number and shows changelog page
-	Inits injected script with localized strings
+	Adds some initing handlers
 */
 
-// Catches messages sent via opera.extension.postMessage (generally, by Options page)
+// Add handler to catch messages sent via opera.extension.postMessage (generally, by Options page)
 opera.extension.addEventListener("message",
 function(ev)
 {
@@ -30,7 +30,7 @@ function(ev)
 }
 , false);
 
-// Init stuff
+// Add handler to creation of injected script, popup, or preferences environment - init stuff
 opera.extension.addEventListener("connect",
 function(ev)
 {
@@ -42,12 +42,22 @@ function(ev)
 	                        sOn: locStrings.sOn,
 	                        sOff: locStrings.sOff}
 	                     });
-
-	// check if versions differ
-	if (widget.preferences["Version"] == undefined || widget.preferences["Version"] != widget.version)
-	{
-		widget.preferences["Version"] = widget.version;
-		opera.extension.tabs.create({url: "/changelog.html", focused: true});
-	}
 }
 , false);
+
+// Check if current extension version differs from saved one (detecting extension update)
+if (widget.preferences["Version"] == undefined || widget.preferences["Version"] != widget.version)
+{
+	// load settings updater
+	var fileref = document.createElement('script')
+	fileref.setAttribute("type", "text/javascript");
+	fileref.setAttribute("src", "/scripts/settupd.js");
+	if (window.fileref != undefined)
+	{
+		document.getElementsByTagName("head")[0].appendChild(fileref);
+		// Update settings to current format. Script isn't loaded immediately so execute
+		// needed function only when it finishes loading
+		fileref.onload = function() { settUpdate(); }
+	}
+	opera.extension.tabs.create({url: "/changelog.html", focused: true});
+}
