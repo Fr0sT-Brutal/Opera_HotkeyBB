@@ -18,6 +18,9 @@
 * Translation: fixed Export declared to use File API too (when it's not)
 + Translation: added version check (shows warning about probable incompleteness/inactuality of translation)
 * Options: fixed Export not saving changes before exporting
+* Background script: fixed unnecessary version check on every page load (now checks only on extension load)
+* Settings update stub (currently does nothing)
+
 
 1.5
 + Localization support, Russian localization added
