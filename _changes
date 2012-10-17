@@ -11,6 +11,13 @@
 + Finnish Localization (thanks to Opeeera)
 * Open tag field length limit increased to 40 (some people find rather weird applications for HkBB so they needed more space)
 * Localization patterns change: now {} instead of %%
+* Options and Changelog bodies now adjust to the current page width
+* Added link for those who wish to translate HkBB 
+* New default tags: [LIST] and [*] (list element)
++ Options: added checkbox to select whether import/merge from file or clipboard
+* Translation: fixed Export declared to use File API too (when it's not)
++ Translation: added version check (shows warning about probable incompleteness/inactuality of translation)
+* Options: fixed Export not saving changes before exporting
 
 1.5
 + Localization support, Russian localization added

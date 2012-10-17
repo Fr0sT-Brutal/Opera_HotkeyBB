@@ -2,7 +2,9 @@
 
 var locStrings =
 {
+	VERSION: "1.6",
 // Common pages
+	sHelpTranslating: "Help translating",
 	sFeedback: "Feedback",
 	sAnn: "Announces (blog)",
 	sChangelog: "Changelog",
@@ -46,15 +48,18 @@ var locStrings =
 	sAddTag: "Add tag",
 	sSettActions: "Settings actions",
 	sExportSett: "Export",
-	sExportSettDescr: "Save current HotkeyBB settings into text file",
+	sExportSettDescr: "Get current HotkeyBB settings as a text",
 	sImportSett: "Import",
-	sImportSettDescr: "Load HotkeyBB settings from text file overriding current ones",
+	sImportSettDescr: "Load HotkeyBB settings from text file <b>overriding</b> current ones",
 	sMergeSett: "Merge",
-	sMergeSettDescr: "Load HotkeyBB settings from text file and merge with current ones",
+	sMergeSettDescr: "Load HotkeyBB settings from text file and <b>merge</b> with current ones",
 	sExpTip: "Copy this text and save it using any text editor",
 	sImpTip: "Paste previously saved settings text into field below and hit OK",
 	sImpAreUSure: "Import will override all current settings! Continue?",
 	sImpErr: "Error importing settings!",
+	sUseFileApi: "Import uses files",
+	sFileApiDescr_File: "Import and merge will be executed via files. Uncheck to use clipboard instead.",
+	sFileApiDescr_Clip: "Import and merge will be executed via clipboard. Uncheck to use files instead.",
 	sSaveNClose: "Save and close",
 // Changelog page
 	sVersHist: "Version history",

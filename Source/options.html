@@ -24,6 +24,7 @@
 <body>
 
 <div id="links">
+<a href="http://my.opera.com/Fr0sT/blog/2012/10/15/hotkeybb-in-your-own-language">{sHelpTranslating}</a>&nbsp;&nbsp;
 <a href="/changelog.html">{sChangelog}</a>&nbsp;&nbsp;
 <a href="https://addons.opera.com/addons/extensions/details/hotkeybb/">{sFeedback}</a>&nbsp;&nbsp;
 <a href="http://my.opera.com/Fr0sT/blog/">{sAnn}</a>
@@ -36,6 +37,10 @@
 </header>
 
 <section>
+	<div id="transl_warn" style="text-align: center; color: red; display: none" >
+	Warning! Your translation has outdated and might be incomplete or inactual.
+	</div>
+
 	<fieldset>
 	<legend>{sWhatsTitle}</legend>
 	<p id="widget-description"></p>
@@ -157,9 +162,6 @@
 	</p>
 	</fieldset>
 
-</section>
-
-<section>
 	<fieldset>
 	<legend>{sSettActions}</legend>
 	<table>
@@ -168,6 +170,8 @@
 		<tr><td><button style="width:100%" onclick="importSettings(true)">{sMergeSett}</button></td><td>{sMergeSettDescr}</td></tr>
 		<input type="file" id="imp_fileselect" style="visibility:hidden">
 	</table>
+	<p id="check_usefileapi" style="display: none"><label><input type="checkbox" onchange="setUseFileApiDescr(this)">{sUseFileApi}</label><br/>
+	<em id="usefileapi_descr"></em></p>
 	</fieldset>
 </section>
 

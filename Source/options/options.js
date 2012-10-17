@@ -240,6 +240,7 @@ function handleFileSelect(ev)
 // export whole settings to a new window
 function exportSettings()
 {
+	guiToSettings(); // ! save any unsaved modifications
 	var settStr = JSON.stringify(widget.preferences);
 	window.open("data:text/plain;,"+escape(settStr));
 }
@@ -343,11 +344,19 @@ function btnCloseClick()
 {
 	guiToSettings();
 	if (!checkSettings()) return;
-	window.close(); // won't work in Opera 11.6x+
-	// we have to do it asyncronously because tabs API is accessible from
-	// backround script only
+	// Close the page.
+	// It used to be window.close() but it won't work since Opera 11.6x.
+	// We have to do it asyncronously because tabs API is accessible from backround script only
 	opera.extension.postMessage({msg: "HKBB_Close_Tab", addr: document.URL});
 };
+
+// Changes description below the "Use file API" checkbox depending on its checked state
+function setUseFileApiDescr(obj)
+{
+	useFileApi = obj.checked;
+	document.getElementById("usefileapi_descr").innerHTML =
+		useFileApi ? locStrings.sFileApiDescr_File : locStrings.sFileApiDescr_Clip;
+}
 
 // prepare GUI stuff
 window.addEventListener("DOMContentLoaded",
@@ -364,7 +373,16 @@ function()
 		widget.name + " <b>" + widget.version + "</b> &copy; " + 
 		"<a href=\"mailto:" + widget.authorEmail + "\" title=\"Email " + widget.author + "\">" + widget.author + "</a>";
 
+	document.getElementById("transl_warn").style.display =
+		(widget.version != locStrings.VERSION ? "" : "none");
+	
 	useFileApi = (FileReader !== undefined);
+	document.getElementById("check_usefileapi").style.display =
+		(useFileApi ? "" : "none");
+	
+	var chbUseFileApi = document.getElementById("check_usefileapi").childNodes[0].childNodes[0];
+	chbUseFileApi.checked = useFileApi;
+	setUseFileApiDescr(chbUseFileApi);
 
 	// Load preferences from storage - catch exceptions if values are undefined
 	try {
