@@ -65,7 +65,7 @@ var locStrings =
 	sVersHist: "Version history",
 	sVer: "Ver.",
 	sVerHilites: "Version highlites:",
-	sVerChanges: "Version changes:",
+	sVerChanges: "Other changes:",
 // Script messages
 	sEnterTag: "Enter non-empty closing tag",
 	sAltHotkeyWarn: "You entered Alt+Key shortcuts for the following tags:\n{tags}\nThese shortcuts are considered system and WON'T work!\nDo you want to fix that?",

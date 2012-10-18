@@ -7,6 +7,33 @@
 var changeLog = 
 [
 	{
+		version: "1.6",
+		highlights:
+		[
+			"\"Save and close\" button actually closes Preferences page",
+			"Added warnings about Alt+Key shortcuts and shortcuts on Linux when non-Latin layout is active (actual up to Opera 12.10)",
+			"Warning box on Preferences page close when tag(s) with Alt+Key shortcut(s) present",
+			"Finnish Localization (thanks to Opeeera)",
+			"Added link for those who wish to translate HkBB ",
+			"Options: added checkbox to select whether import/merge from file or clipboard"
+		],
+		changes:
+		[
+			"* Options and Changelog bodies now adjust to the current page width",
+			"* CSS: \"transition\" properties added (-o* prefixes are obsolete in Opera 12.50)",
+			"* Preferences and Changelog pages have their own titles",
+			"* Fixed issue: debug message box shows wrong site options",
+			"* Open tag field length limit increased to 40 (some people find rather weird applications for HkBB so they needed more space)",
+			"* New default tags: [LIST] and [*] (list element)",
+			"* Translation: fixed Export declared to use File API too (when it's not)",
+			"+ Translation: added version check (shows warning about probable incompleteness/inactuality of translation)",
+			"* Options: fixed Export not saving changes before exporting",
+			"* Background script: fixed unnecessary version check on every page load (now checks only on extension load)",
+			"+ Options: added credits"
+		]
+	},
+
+	{
 		version: "1.5",
 		highlights:
 		[
@@ -17,11 +44,7 @@ var changeLog =
 		],
 		changes:
 		[
-			"+ Localization support",
-			"+ Partial urls in site options",
-			"* Prefs page: looks a little nicer (checkboxes, comboboxes, edits)",
-			"+ Export, import and merge the settings",			
-			"+ Debug hotkey: show current url, domain, site opts",
+			"* Prefs page: looks a little nicer (checkboxes, comboboxes, edits)"
 		]
 	},
 
@@ -37,12 +60,9 @@ var changeLog =
 		[
 			"+ Added default item to \"SiteOptions\" list",
 			"+ Added license url in config.xml — eliminating warning in error console",
-			"+ New option \"Default site options\" — set Quotes, HTML, Uppercase modes globally",
 			"+ Feedback and blog links on Prefs page",
 			"+ Nicer links style on Prefs page",
-			"* Empty tags are ignored on save",
-			"+ Editable closing tags",
-			"+ Version check"
+			"* Empty tags are ignored on save"
 		]
 	},
 	{
@@ -53,7 +73,6 @@ var changeLog =
 		],
 		changes:
 		[
-			"+ Global \"Quote mode\" option",
 			"* Quotes are off by default"
 		]
 	},
