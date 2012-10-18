@@ -36,12 +36,12 @@ function(ev)
 {
 	// Commands the injected script to init and sends it localized strings it uses
 	ev.source.postMessage({msg: "HKBB_Init", 
-	                      locStrings: {
-	                        sEnterTagOption: locStrings.sEnterTagOption, 
-	                        sDebugMsg: locStrings.sDebugMsg,
-	                        sOn: locStrings.sOn,
-	                        sOff: locStrings.sOff}
-	                     });
+	                       locStrings: {
+	                         sEnterTagOption: locStrings.sEnterTagOption, 
+	                         sDebugMsg: locStrings.sDebugMsg,
+	                         sOn: locStrings.sOn,
+	                         sOff: locStrings.sOff}
+	                      });
 }
 , false);
 

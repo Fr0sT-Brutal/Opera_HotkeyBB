@@ -68,16 +68,16 @@ var locStrings =
 	sVerChanges: "Version changes:",
 // Script messages
 	sEnterTag: "Enter non-empty closing tag",
-	sAltHotkeyWarn: "You entered Alt+Key shortcuts for the following tags:\n<tags>\nThese shortcuts are considered system and WON'T work!\nDo you want to fix that?",
+	sAltHotkeyWarn: "You entered Alt+Key shortcuts for the following tags:\n{tags}\nThese shortcuts are considered system and WON'T work!\nDo you want to fix that?",
 // Injected script messages
-	sEnterTagOption: "Enter an option for the tag <tag>.\nCancel this box to omit option",
+	sEnterTagOption: "Enter an option for the tag {tag}.\nCancel this box to omit option",
 	sDebugMsg: "HotkeyBB debug info.\n"+
-	           "Current URL: <url>\n"+
-	           "Domain: <domain>\n"+
+	           "Current URL: {url}\n"+
+	           "Domain: {domain}\n"+
 	           "Site options:\n"+
-	           "   Quotes <quotes>\n"+
-	           "   HTML tags <tags>\n"+
-	           "   Tag uppercase <upcase>",
+	           "   Quotes {quotes}\n"+
+	           "   HTML tags {tags}\n"+
+	           "   Tag uppercase {upcase}",
 	sOn: "ON",
 	sOff: "OFF"
 }

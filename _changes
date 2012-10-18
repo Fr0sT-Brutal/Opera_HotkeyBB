@@ -20,7 +20,9 @@
 * Options: fixed Export not saving changes before exporting
 * Background script: fixed unnecessary version check on every page load (now checks only on extension load)
 * Settings update stub (currently does nothing)
-
+* Patterns change: use {} instead of <>
++ Options: added credits
+* Options: more friendly tag list in "Alt+Key" warning message
 
 1.5
 + Localization support, Russian localization added

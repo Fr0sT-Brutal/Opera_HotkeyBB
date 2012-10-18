@@ -48,11 +48,11 @@ var currUrl;
 var locStrings = null;
 
 // Inserts values into string with patterns
-// insPattern("Extension <extname> is <extprop>!", {extname: "HotkeyBB", extprop: "awesome"}) =>
+// insPattern("Extension {extname} is {extprop}!", {extname: "HotkeyBB", extprop: "awesome"}) =>
 // "Extension HotkeyBB is awesome!"
 function insPattern(text, values)
 {
-	return text.replace(/<(\w*)>/g,
+	return text.replace(/\{(\w*)\}/g,
 	                    function(str, code)
                         {
                              var res = values[code];

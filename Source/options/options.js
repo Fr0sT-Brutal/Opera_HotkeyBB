@@ -4,6 +4,19 @@
 	A set of routines for use in options.html
 */
 
+// Inserts values into string with patterns
+// insPattern("Extension {extname} is {extprop}!", {extname: "HotkeyBB", extprop: "awesome"}) =>
+// "Extension HotkeyBB is awesome!"
+function insPattern(text, values)
+{
+	return text.replace(/\{(\w*)\}/g,
+	                    function(str, code)
+                        {
+                             var res = values[code];
+                             return (res == undefined) ? str: res;
+                        });
+}
+
 /* TABLE STUFF */
 
 // deletes from a table the row that contains given elem
@@ -220,11 +233,15 @@ function checkSettings()
 {
 	// check for Alt+Key shortcuts
 	var s = "";
+	var count = 1;
 	for (var tag in HKBB_Tags)
 		if (HKBB_Tags[tag].HKMods == MOD_ALT)
-			s += "*\t" + HKBB_Tags[tag].Open + "\n";
+		{
+			s += count + ") " + HKBB_Tags[tag].Open + "\n";
+			count++;
+		}
 	if (s != "")
-		if (confirm(locStrings.sAltHotkeyWarn.replace("<tags>", s)))
+		if (confirm(insPattern(locStrings.sAltHotkeyWarn, {tags: s})))
 			return false;
 	// ...
 	
@@ -370,8 +387,15 @@ function()
 	document.getElementById("close-btn").onclick = btnCloseClick;
 
 	document.getElementById("footer-text").innerHTML =
-		widget.name + " <b>" + widget.version + "</b> &copy; " + 
-		"<a href=\"mailto:" + widget.authorEmail + "\" title=\"Email " + widget.author + "\">" + widget.author + "</a>";
+		insPattern("{WName} <b>{WVer}</b> &copy; <a href=\"mailto:{WEmail}\" title=\"Email {WAuth}\">{WAuth}</a><br/>"+
+			"<b>Special thanks</b>:</br>" +
+			"AMAZIGH Aneglus — icon</br>" +
+			"<a href=\"https://addons.opera.com/en/search/?developer=spadija\">spadija</a> (Tab Vault), <a href=\"https://addons.opera.com/en/search/?developer=Jere\">Jere</a> (Persistent text) — design & ideas</br>"+
+			"Opeeera — Finnish translation",
+			{WName: widget.name,
+			 WVer: widget.version,
+			 WEmail: widget.authorEmail,
+			 WAuth: widget.author});
 
 	document.getElementById("transl_warn").style.display =
 		(widget.version != locStrings.VERSION ? "" : "none");
