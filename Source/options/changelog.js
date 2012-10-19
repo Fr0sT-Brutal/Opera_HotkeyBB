@@ -16,8 +16,8 @@ var changeLog =
 			"Finnish Localization (thanks to Opeeera)",
 			"Added link for those who wish to translate HkBB ",
 			"Options: added checkbox to select whether import/merge from file or clipboard",
-			"Fixed numpad keys working incorrectly on Opera 12+",
-			"Tag toggling: if current selection or cursor position is surrounded with or contains tag TAG at its edges and user commands to insert the same tag TAG, this TAG is removed (would be doubled in previous versions)."
+			"Fixed numpad keys working tricky on Opera 12+",
+			"Tag toggling: if current selection or cursor position is surrounded or starts/ends with tag TAG and user commands to insert the same tag TAG, this TAG is removed (would be doubled in previous versions)."
 		],
 		changes:
 		[

@@ -23,8 +23,8 @@
 * Patterns change: use {} instead of <>
 + Options: added credits
 * Options: more friendly tag list in "Alt+Key" warning message
-+ Fixed numpad keys working incorrectly on Opera 12+
-+ Tag toggling: if current selection or cursor position is surrounded with or contains tag TAG at its edges and user commands to insert the same tag TAG, this TAG is removed (would be doubled in previous versions).
++ Fixed numpad keys working tricky on Opera 12+
++ Tag toggling: if current selection or cursor position is surrounded or starts/ends with tag TAG and user commands to insert the same tag TAG, this TAG is removed (would be doubled in previous versions).
 
 1.5
 + Localization support, Russian localization added
