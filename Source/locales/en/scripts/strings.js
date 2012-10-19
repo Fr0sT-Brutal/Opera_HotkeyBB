@@ -59,7 +59,7 @@ var locStrings =
 	sImpErr: "Error importing settings!",
 	sUseFileApi: "Import using files",
 	sFileApiDescr_File: "Import and merge will be executed via files. Uncheck to use clipboard instead.",
-	sFileApiDescr_Clip: "Import and merge will be executed via clipboard. Uncheck to use files instead.",
+	sFileApiDescr_Clip: "Import and merge will be executed via clipboard. Check to use files instead.",
 	sSaveNClose: "Save and close",
 // Changelog page
 	sVersHist: "Version history",
