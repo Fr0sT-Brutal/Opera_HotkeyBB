@@ -15,7 +15,9 @@ var changeLog =
 			"Warning box on Preferences page close when tag(s) with Alt+Key shortcut(s) present",
 			"Finnish Localization (thanks to Opeeera)",
 			"Added link for those who wish to translate HkBB ",
-			"Options: added checkbox to select whether import/merge from file or clipboard"
+			"Options: added checkbox to select whether import/merge from file or clipboard",
+			"Fixed numpad keys working incorrectly on Opera 12+",
+			"Tag toggling: if current selection or cursor position is surrounded with or contains tag TAG at its edges and user commands to insert the same tag TAG, this TAG is removed (would be doubled in previous versions)."
 		],
 		changes:
 		[

@@ -72,14 +72,24 @@ function HKBB_OnKeyDown(ev)
 	if (!ev.keyCode) return false;
 	if ((ev.keyCode == 0) || (ev.keyCode == 16) || (ev.keyCode == 17) || (ev.keyCode == 18) ) return false;
 
-	var evKey = String.fromCharCode(ev.keyCode).toUpperCase();
+	var keyCode = ev.keyCode;
+	// fix for keycodes on numeric keypad: they come with special keycodes:
+	// '0'..'9' are #96..#105 so we need to substract 48
+	if (keyCode >= 96 && keyCode <= 105)
+		keyCode -= 48;
+	// '*'..'/' are #106..#111 so we need to substract 64
+	else
+	if (keyCode >= 106 && keyCode <= 111)
+		keyCode -= 64;
+
+	var evKey = String.fromCharCode(keyCode).toUpperCase();
 	var evMods = 0;
 	if (ev.altKey)   evMods = evMods | MOD_ALT;
 	if (ev.ctrlKey)  evMods = evMods | MOD_CTRL;
 	if (ev.shiftKey) evMods = evMods | MOD_SHIFT;
 
 	// check for debug hotkey
-	if (evMods == DEBUGHK_MODS && ev.keyCode == DEBUGHK_KEY)
+	if (evMods == DEBUGHK_MODS && keyCode == DEBUGHK_KEY)
 	{
 		alert(insPattern(locStrings.sDebugMsg, 
                 		 {url:    document.URL,
@@ -98,26 +108,27 @@ function HKBB_OnKeyDown(ev)
 		if (HKBB_Tags[tag].HKMods == evMods && HKBB_Tags[tag].HKKey == evKey)
 			{ currtag = HKBB_Tags[tag]; break; }
 	if (currtag == null) return false; // not ours - let it pass
+
 	HKBB_EvHandled = true;
 	var Option = null;
-	var SelText = null;
 	var edit = ev.target ? ev.target : ev.srcElement;
-	SelText = edit.value.substring(edit.selectionStart,edit.selectionEnd);
+	var selStart = edit.selectionStart;
+	var selEnd = edit.selectionEnd;
+	var SelText = edit.value.substring(selStart, selEnd);
+	// consider site-specific options
+	var quote        = (HKBB_SiteOptions & OPT_QUOTES)  ? '"' : '';
+	var openBracket  = (HKBB_SiteOptions & OPT_HTMLTAG) ? '<' : '[';
+	var closeBracket = (HKBB_SiteOptions & OPT_HTMLTAG) ? '>' : ']';
 
-	// determine tag option (if necessary)
+	// determine tag option (if needed)
 	if (currtag.HasOption)
-		if (currtag.SelToOption && SelText)
+		if (currtag.SelToOption && SelText != "")
 		{	
 			Option = SelText;
 			SelText = ""; // we moved selected text to option, text inside the tag pair will be empty
 		}
 		else
 			Option = prompt(insPattern(locStrings.sEnterTagOption, {tag: currtag.Open.toUpperCase()}), "");
-
-	// consider site-specific options
-	var quote        = (HKBB_SiteOptions & OPT_QUOTES)  ? '"' : '';
-	var openBracket  = (HKBB_SiteOptions & OPT_HTMLTAG) ? '<' : '[';
-	var closeBracket = (HKBB_SiteOptions & OPT_HTMLTAG) ? '>' : ']';
 
 	// construct the tags
 	var opentag = openBracket + 
@@ -131,19 +142,58 @@ function HKBB_OnKeyDown(ev)
 		closetag = openBracket + "/" + 
 		           ((HKBB_SiteOptions & OPT_TAGUPCASE) ? currtag.Open.toUpperCase() : currtag.Open ) +
 		           closeBracket;
-	// property could be set to empty string to omit a closing tag (e.g. [img=...url...] )
+	// property could be set to empty string to omit a closing tag (e.g. [img=http://example.com/1.jpg] )
 	else if (currtag.Close == "")
 		closetag = "";
 	else
 		closetag = openBracket + "/" + 
 		           ((HKBB_SiteOptions & OPT_TAGUPCASE) ? currtag.Close.toUpperCase() : currtag.Close) +
 		           closeBracket;
+		           
+	// check for tag toggle (if selected text is surrounded or contains at its edges the same tag as
+	// a user wants to insert, remove it instead of inserting).
+	// Only optionless tags are supported!
+	if (!currtag.hasOption)
+	{
+		// cheñk if current selection contains tags at its edges
+		if (SelText != "")
+			if (SelText.substr(0, opentag.length) == opentag &&
+			    SelText.substr(SelText.length - closetag.length) == closetag)
+			{
+				SelText = SelText.substring(opentag.length, SelText.length - closetag.length);
+				// insert new selection
+				edit.selectionEnd = selStart;
+				edit.value = edit.value.substring(0, selStart) +
+				             SelText +
+				             edit.value.substring(selEnd);
+				// select inserted text
+				edit.selectionStart = selStart;
+				edit.selectionEnd = edit.selectionStart + SelText.length;
+				
+				return true;				
+			}
+		// cheñk if current selection (or cursor position) is surrounded by tags
+		if (edit.value.substr(selStart - opentag.length, opentag.length) == opentag &&
+		    edit.value.substr(selEnd, closetag.length) == closetag)
+		{
+			// remove tags
+			edit.selectionEnd = selStart;
+			edit.value = edit.value.substr(0, selStart  - opentag.length) +
+			             SelText +
+			             edit.value.substring(selEnd + closetag.length);
+			// select inserted text
+			edit.selectionStart = selStart - opentag.length;
+			edit.selectionEnd = edit.selectionStart + SelText.length;
+			
+			return true;				
+		}
+	}
 
 	// insert tags
-	var selStart = edit.selectionStart;
+	edit.selectionEnd = selStart;
 	edit.value = edit.value.substring(0, selStart) +
 	             opentag + SelText + closetag +
-	             edit.value.substring(edit.selectionEnd);
+	             edit.value.substring(selEnd);
 	// select the text between tags or just set the cursor there
 	edit.selectionStart = selStart + opentag.length;
 	edit.selectionEnd = edit.selectionStart + SelText.length;
