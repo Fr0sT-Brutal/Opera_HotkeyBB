@@ -38,6 +38,8 @@ function(ev)
 	ev.source.postMessage({msg: "HKBB_Init", 
 	                       locStrings: {
 	                         sEnterTagOption: locStrings.sEnterTagOption, 
+	                         sEnterOpenTagText: locStrings.sEnterOpenTagText,
+	                         sEnterCloseTagText: locStrings.sEnterCloseTagText,
 	                         sDebugMsg: locStrings.sDebugMsg,
 	                         sOn: locStrings.sOn,
 	                         sOff: locStrings.sOff}

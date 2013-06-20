@@ -34,6 +34,19 @@ button.footer-button {
 	font-weight: bold;
 }
 
+table {
+	width: 100%;
+}
+
+table.opt_table thead {
+	background-color: #d3dbf5;
+}
+
+table.opt_table th, table.opt_table td {
+	border: 1px solid;
+	border-radius: 3px;
+}
+
 a {
 	padding: 1px 1px 0;
 	margin: -1px -1px 0;

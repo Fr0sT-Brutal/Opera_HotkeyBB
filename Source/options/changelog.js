@@ -7,6 +7,19 @@
 var changeLog = 
 [
 	{
+		version: "1.7",
+		highlights:
+		[
+			"Custom tags (inputable at insert)",
+		],
+		changes:
+		[
+			"+ Custom tags: set OPEN property to &quot;?&quot; and HkBB will ask you to enter tag text every time you invoke the tag. You can set CLOSE property to &quot;?&quot; as well thus getting two propmpts.",
+			"* Options page cosmetic fixes, tables look nicer"
+		]
+	},
+
+	{
 		version: "1.6",
 		highlights:
 		[

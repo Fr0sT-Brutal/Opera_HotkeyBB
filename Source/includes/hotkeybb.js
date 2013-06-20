@@ -33,12 +33,12 @@ const DEBUGHK_KEY = 112; // F1
 
 /*
 Tag array contains objects with the following fields:
-	open:        String  - opening tag
-	close:       String  - closing tag; if the same as opening, null value could be used
-	hasOption:   Boolean - tag has an option ([open="option"]text[close]
-	selToOption: Boolean - selected text would be used as option
-	hkmods:      Number  - modifier set for the shortcut
-	hkkey:       Char    - literal or digit key for the shortcut
+	Open:        String  - opening tag
+	Close:       String  - closing tag; if the same as opening, null value could be used
+	HasOption:   Boolean - tag has an option ([open="option"]text[close]
+	SelToOption: Boolean - selected text would be used as option
+	HKMods:      Number  - modifier set for the shortcut
+	HKKey:       Char    - literal or digit key for the shortcut
 */
 var HKBB_Tags = [];
 var HKBB_SiteOptions;            // Option set for current site. Simple integer bit map
@@ -110,45 +110,59 @@ function HKBB_OnKeyDown(ev)
 	if (currtag == null) return false; // not ours - let it pass
 
 	HKBB_EvHandled = true;
-	var Option = null;
 	var edit = ev.target ? ev.target : ev.srcElement;
 	var selStart = edit.selectionStart;
 	var selEnd = edit.selectionEnd;
 	var SelText = edit.value.substring(selStart, selEnd);
+	// Current tag properties
+	var option = null;
+	var opentag = null;
+	var closetag = null;
 	// consider site-specific options
 	var quote        = (HKBB_SiteOptions & OPT_QUOTES)  ? '"' : '';
 	var openBracket  = (HKBB_SiteOptions & OPT_HTMLTAG) ? '<' : '[';
 	var closeBracket = (HKBB_SiteOptions & OPT_HTMLTAG) ? '>' : ']';
 
+	// determine open tag text (if it is an inputable tag)
+	if (currtag.Open == "?")
+		opentag = prompt(locStrings.sEnterOpenTagText, "");
+	else
+		opentag = currtag.Open;
+	if (opentag == undefined) return; // user cancel
+
 	// determine tag option (if needed)
 	if (currtag.HasOption)
 		if (currtag.SelToOption && SelText != "")
 		{	
-			Option = SelText;
+			option = SelText;
 			SelText = ""; // we moved selected text to option, text inside the tag pair will be empty
 		}
 		else
-			Option = prompt(insPattern(locStrings.sEnterTagOption, {tag: currtag.Open.toUpperCase()}), "");
+			option = prompt(insPattern(locStrings.sEnterTagOption, {tag: opentag.toUpperCase()}), "");
 
-	// construct the tags
-	var opentag = openBracket + 
-	              ((HKBB_SiteOptions & OPT_TAGUPCASE) ? currtag.Open.toUpperCase() : currtag.Open ) +
-	              ((Option != null) ? ("="+quote+Option+quote) : "") +
-	              closeBracket;
-	var closetag;
-	// property could be null or undefined if a closing tag is equal to an opening one
+	// determine open tag text (if it is an inputable tag)
+	if (currtag.Close == "?")
+		closetag = prompt(locStrings.sEnterCloseTagText, "");
+	else
+		closetag = currtag.Close;
+
+	// construct the tags - process close tag first as it uses value of the open tag
+	
+	// property could be null or undefined if a closing tag is set to "=Open"
 	// !!! "== undefined" works both if variable is undefined and null !!!
-	if (currtag.Close == undefined)
+	if (closetag == undefined)
 		closetag = openBracket + "/" + 
-		           ((HKBB_SiteOptions & OPT_TAGUPCASE) ? currtag.Open.toUpperCase() : currtag.Open ) +
+		           ((HKBB_SiteOptions & OPT_TAGUPCASE) ? opentag.toUpperCase() : opentag ) +
 		           closeBracket;
 	// property could be set to empty string to omit a closing tag (e.g. [img=http://example.com/1.jpg] )
-	else if (currtag.Close == "")
-		closetag = "";
-	else
+	else if (closetag != "")
 		closetag = openBracket + "/" + 
-		           ((HKBB_SiteOptions & OPT_TAGUPCASE) ? currtag.Close.toUpperCase() : currtag.Close) +
+		           ((HKBB_SiteOptions & OPT_TAGUPCASE) ? closetag.toUpperCase() : closetag) +
 		           closeBracket;
+	opentag = openBracket + 
+              ((HKBB_SiteOptions & OPT_TAGUPCASE) ? opentag.toUpperCase() : opentag ) +
+              ((option != null) ? ("="+quote+option+quote) : "") +
+              closeBracket;
 		           
 	// check for tag toggle (if selected text is surrounded or contains at its edges the same tag as
 	// a user wants to insert, remove it instead of inserting).

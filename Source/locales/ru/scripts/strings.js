@@ -2,7 +2,7 @@
 
 var locStrings =
 {
-	VERSION: "1.6",
+	VERSION: "1.7",
 // Common pages
 	sHelpTranslating: "Помочь переводом",
 	sFeedback: "Отзывы",
@@ -30,8 +30,8 @@ var locStrings =
 	sAddSiteOpt: "Добавить опцию сайта",
 	sTagListTitle: "Список тегов",
 	sTagListDescr: "Список всех доступных тегов. Можно удалять имеющиеся теги и добавлять новые.",
-	sTagListItem1: "<em>Откр. тег</em> — открывающий тег",
-	sTagListItem2: "<em>Закр. тег</em> — закрывающий тег; может совпадать с открывающим, может отсутствовать (как у [tag=&quot;парам&quot;]) или иметь произвольное значение",
+	sTagListItem1: "<em>Откр. тег</em> — открывающий тег. Если значение = &quot;?&quot;, будет выдан запрос на ввод текста тега",
+	sTagListItem2: "<em>Закр. тег</em> — закрывающий тег; может совпадать с открывающим, может отсутствовать (как у [tag=&quot;парам&quot;]) или иметь произвольное значение. Если значение = &quot;?&quot;, будет выдан запрос на ввод текста тега",
 	sTagListItem3: "<em>Параметр</em> — тег имеет параметр (как [tag=&quot;парам&quot;]текст[/tag])",
 	sTagListItem4: "<em>Выделение в параметр</em> — выделенный текст будет использован как параметр (если не отмечено — будет выдан запрос на ввод параметра)",
 	sTagListItem5: "<em>Клавиша</em> — комбинация клавиш, вызывающая вставку тега",
@@ -41,7 +41,7 @@ var locStrings =
 	sOption: "Парам.",
 	sSelToOpt: "Выдел. в парам.",
 	sHotkey: "Клавиша",
-	sDelHK: "Удалить горячую клавишу",
+	sDelTag: "Удалить тег",
 	sAsOpen: "= Откр.",
 	sNone: "[Нет]",
 	sEnter: "Ввести…",
@@ -69,8 +69,10 @@ var locStrings =
 // Script messages
 	sEnterTag: "Введите непустой закрывающий тег",
 	sAltHotkeyWarn: "Вы указали комбинации вида Alt+Клавиша для следующих тегов:\n{tags}\nЭти комбинации считаются системными и работать НЕ будут!\nХотите исправить?",
-// Injected script messages
+// Injected script messages - don't forget to add new entries in \scripts\background.js:opera.extension.addEventListener("connect")!
 	sEnterTagOption: "Введите параметр для тега {tag}.\nНажмите Отмена, чтобы вставить тег без параметра.",
+	sEnterOpenTagText: "Введите открывающий тег.\nНажмите Отмена, чтобы прервать вставку тега.",
+	sEnterCloseTagText: "Введите закрывающий тег.",
 	sDebugMsg: "Отладочные данные HotkeyBB.\n"+
 	           "Текущий URL: {url}\n"+
 	           "Домен: {domain}\n"+

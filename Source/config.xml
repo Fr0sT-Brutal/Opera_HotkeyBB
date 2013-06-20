@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<widget xmlns="http://www.w3.org/ns/widgets" id="https://addons.opera.com/addons/extensions/details/hotkeybb/" defaultlocale="en" version="1.6">
+<widget xmlns="http://www.w3.org/ns/widgets" id="https://addons.opera.com/addons/extensions/details/hotkeybb/" defaultlocale="en" version="1.7">
  <name>HotkeyBB</name>
  <icon src="images/icon.png"/>
  <content src="index.html" encoding="utf-8" type="text/html"/>
@@ -23,4 +23,5 @@ limitations under the License.</license>
  <update-description href="https://extension-updates.opera.com/api/w3c-wd1/update/f6a18303-b73c-4e5c-8643-4f064a226cd8/"/>
  <description xml:lang="en">This extension allows a user to input BB-codes and HTML tags quickly with hotkeys.</description>
  <description xml:lang="ru">Это расширение позволяет быстро вводить BB-коды и HTML теги с помощью горячих клавиш.</description>
+ <description xml:lang="fi">Tämän laajennuksen avulla voit syöttää BB-koodia ja HTML-tageja kätevästi pikanäppäimillä.</description>
 </widget>

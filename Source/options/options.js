@@ -33,7 +33,7 @@ function deleteRow(elem)
 	}
 }
 
-// adds a new row to the table identified by tabIdx
+// adds a new row to the table identified by tabName
 function addRow(tabName)
 {
 	var table = document.getElementById(tabName);
@@ -390,7 +390,7 @@ function()
 		insPattern("{WName} <b>{WVer}</b> &copy; <a href=\"mailto:{WEmail}\" title=\"Email {WAuth}\">{WAuth}</a><br/>"+
 			"<b>Special thanks</b>:</br>" +
 			"AMAZIGH Aneglus — icon</br>" +
-			"<a href=\"https://addons.opera.com/en/search/?developer=spadija\">spadija</a> (Tab Vault), <a href=\"https://addons.opera.com/en/search/?developer=Jere\">Jere</a> (Persistent text) — design & ideas</br>"+
+			"<a href=\"https://addons.opera.com/en/search/?developer=spadija\">spadija</a> (Tab Vault), <a href=\"https://addons.opera.com/en/search/?developer=Jere\">Jere</a> (Persistent text) — design & ideas of Settings page</br>"+
 			"Opeeera — Finnish translation",
 			{WName: widget.name,
 			 WVer: widget.version,

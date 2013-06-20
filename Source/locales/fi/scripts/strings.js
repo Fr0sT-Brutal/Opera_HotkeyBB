@@ -2,7 +2,7 @@
 
 var locStrings =
 {
-	VERSION: "1.6",
+	VERSION: "1.7",
 // Common pages
 	sHelpTranslating: "Auta kääntämisessä"
 	sFeedback: "Palaute",
@@ -30,8 +30,8 @@ var locStrings =
 	sAddSiteOpt: "Lisää sivusto",
 	sTagListTitle: "Tagiluettelo",
 	sTagListDescr: "Tässä on luettelo käytettävissä olevista tageista. Voit vapaasti poistaa ja lisätä niitä.",
-	sTagListItem1: "<em>Avaustagi</em> — avaava tagi",
-	sTagListItem2: "<em>Sulkutagi</em> — sulkeva tagi; voi olla sama kuin avaava tagi, tyhjä (ts. [tag=&quot;option&quot;]) tai vapaavalintainen",
+	sTagListItem1: "<em>Avaustagi</em> — avaava tagi. If set to &quot;?&quot;, you will be prompted for the tag text",
+	sTagListItem2: "<em>Sulkutagi</em> — sulkeva tagi; voi olla sama kuin avaava tagi, tyhjä (ts. [tag=&quot;option&quot;]) tai vapaavalintainen. If set to &quot;?&quot;, you will be prompted for the tag text",
 	sTagListItem3: "<em>Parametri</em> — tagi tarvitsee parametrin (ts. [tag=&quot;option&quot;]tekstiä[/tag])",
 	sTagListItem4: "<em>Valinta parametriksi</em> — valittua tekstiä käytetään parametrina",
 	sTagListItem5: "<em>Näppäinyhdistelmä</em> — näppäinyhdistelmä, joka syöttää tagin",
@@ -41,7 +41,7 @@ var locStrings =
 	sOption: "Parametri",
 	sSelToOpt: "Valinta parametriksi",
 	sHotkey: "Näppäinyhdistelmä",
-	sDelHK: "Poista tagi",
+	sDelTag: "Poista tagi",
 	sAsOpen: "= avaus",
 	sNone: "[tyhjä]",
 	sEnter: "Oma…",
@@ -69,8 +69,10 @@ var locStrings =
 // Script messages
 	sEnterTag: "Syötä sulkeva tagi (ei saa olla tyhjä)",
 	sAltHotkeyWarn: "Syötit Alt-näppäin -yhdistelmiä seuraaville tageille:\n{tags}\nAlt-näppäin -yhdistelmät on varattu järjestelmän käyttöön, joten ne EIVÄT tule toimimaan!\nHaluatko korjata syöttämäsi näppäinyhdistelmät?",
-// Injected script messages
+// Injected script messages - don't forget to add new entries in \scripts\background.js:opera.extension.addEventListener("connect")!
 	sEnterTagOption: "Syötä parametri {tag}-tagille.\nPaina \"Peruuta\", jos haluat jättää parametrin pois",
+	sEnterOpenTagText: "Enter opening tag.\nCancel this box to omit tag insertion",
+	sEnterCloseTagText: "Enter closing tag.",
 	sDebugMsg: "HotkeyBB:n debug-tietoja.\n"+
 	           "Sivun osoite: {url}\n"+
 	           "Domain: {domain}\n"+

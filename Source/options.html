@@ -61,7 +61,7 @@
 	</p>
 	<h3>{sDefSiteOptsTitle}</h3>
 	<p>
-		<table border="1" width="100%" id="DefaultSiteOpts">
+		<table class="opt_table" id="DefaultSiteOpts">
 			<thead>
 				<tr>
 					<th width="30%">{sQuotesHdr}</th>
@@ -80,7 +80,7 @@
 	<h3>{sSiteSpecTitle}</h3>
 	<p>{sSiteSpecDescr}</p>
 	<p>
-		<table border="1" width="100%" id="TableSiteOpts">
+		<table class="opt_table" id="TableSiteOpts">
 			<thead>
 				<tr>
 					<th></th>
@@ -121,7 +121,7 @@
 	</p>
 	<p>{sHotkeyWarn}</p>
 	<p>
-		<table border="1" width="100%" id="TableTags">
+		<table class="opt_table" id="TableTags">
 			<thead align="center">
 				<tr>
 					<th></th>
@@ -135,7 +135,7 @@
 			<tbody align="center">
 				<!-- Invisible pattern row -->
 				<tr style="display: none">
-					<td><button title="{sDelHK}" onclick="deleteRow(this)"><b>X</b></button></td>
+					<td><button title="{sDelTag}" onclick="deleteRow(this)"><b>X</b></button></td>
 					<td><input type="text" maxlength="40" size="10" name="OpenTag"></td>
 					<td>
 						<select name="CloseTag" onchange="closeTagCBChange(this)">

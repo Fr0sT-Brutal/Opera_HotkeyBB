@@ -2,7 +2,7 @@
 
 var locStrings =
 {
-	VERSION: "1.6",
+	VERSION: "1.7",
 // Common pages
 	sHelpTranslating: "Help translating",
 	sFeedback: "Feedback",
@@ -30,18 +30,18 @@ var locStrings =
 	sAddSiteOpt: "Add site option",
 	sTagListTitle: "Tag list",
 	sTagListDescr: "Here's the list of all tags available. You may delete any of them and add new ones.",
-	sTagListItem1: "<em>Open tag</em> — opening tag",
-	sTagListItem2: "<em>Close tag</em> — closing tag; could be the same as opening, null (like [tag=&quot;option&quot;]) or custom",
+	sTagListItem1: "<em>Open tag</em> — opening tag. If set to &quot;?&quot;, you will be prompted for the tag text",
+	sTagListItem2: "<em>Close tag</em> — closing tag; could be the same as opening, null (like [tag=&quot;option&quot;]) or custom. If set to &quot;?&quot;, you will be prompted for the tag text",
 	sTagListItem3: "<em>Option</em> — tag has an option (like [tag=&quot;option&quot;]text[/tag])",
 	sTagListItem4: "<em>Sel to option</em> — selected text would be used as option",
-	sTagListItem5: "<em>Hotkey</em> — key combination which will insert the tag",
+	sTagListItem5: "<em>Hotkey</em> — key combination to insert the tag",
 	sHotkeyWarn: "<strong>Note</strong>. Alt+Key shortcuts won't work because they're considered system combinations (menu item activation).<br/><strong>Note</strong>. HotkeyBB could fail to catch some keystrokes on some OS (Linux, maybe Mac) when non-Latin keyboard layout is active due to Opera bug with event.keyCode (fixed in Opera 12.10b).",
 	sOpenTag: "Open tag",
 	sCloseTag: "Close tag",
 	sOption: "Option",
 	sSelToOpt: "Sel to option",
 	sHotkey: "Hotkey",
-	sDelHK: "Delete hotkey",
+	sDelTag: "Delete tag",
 	sAsOpen: "= Open",
 	sNone: "[None]",
 	sEnter: "Enter…",
@@ -69,8 +69,10 @@ var locStrings =
 // Script messages
 	sEnterTag: "Enter non-empty closing tag",
 	sAltHotkeyWarn: "You entered Alt+Key shortcuts for the following tags:\n{tags}\nThese shortcuts are considered system and WON'T work!\nDo you want to fix that?",
-// Injected script messages
+// Injected script messages - don't forget to add new entries in \scripts\background.js:opera.extension.addEventListener("connect")!
 	sEnterTagOption: "Enter an option for the tag {tag}.\nCancel this box to omit option",
+	sEnterOpenTagText: "Enter opening tag.\nCancel this box to omit tag insertion",
+	sEnterCloseTagText: "Enter closing tag.",
 	sDebugMsg: "HotkeyBB debug info.\n"+
 	           "Current URL: {url}\n"+
 	           "Domain: {domain}\n"+
