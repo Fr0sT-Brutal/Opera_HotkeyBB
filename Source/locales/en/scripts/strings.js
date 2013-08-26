@@ -64,7 +64,7 @@ var locStrings =
 // Changelog page
 	sVersHist: "Version history",
 	sVer: "Ver.",
-	sVerHilites: "Version highlites:",
+	sVerHilites: "Version highlights:",
 	sVerChanges: "Other changes:",
 // Script messages
 	sEnterTag: "Enter non-empty closing tag",

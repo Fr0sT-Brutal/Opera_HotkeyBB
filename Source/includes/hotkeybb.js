@@ -176,10 +176,10 @@ function HKBB_OnKeyDown(ev)
 			{
 				SelText = SelText.substring(opentag.length, SelText.length - closetag.length);
 				// insert new selection
-				edit.selectionEnd = selStart;
 				edit.value = edit.value.substring(0, selStart) +
 				             SelText +
 				             edit.value.substring(selEnd);
+				edit.selectionStart = edit.selectionEnd = selStart; // ! move the cursor to selStart to avoid textarea scrolling
 				// select inserted text
 				edit.selectionStart = selStart;
 				edit.selectionEnd = edit.selectionStart + SelText.length;
@@ -191,10 +191,10 @@ function HKBB_OnKeyDown(ev)
 		    edit.value.substr(selEnd, closetag.length) == closetag)
 		{
 			// remove tags
-			edit.selectionEnd = selStart;
 			edit.value = edit.value.substr(0, selStart  - opentag.length) +
 			             SelText +
 			             edit.value.substring(selEnd + closetag.length);
+			edit.selectionStart = edit.selectionEnd = selStart; // ! move the cursor to selStart to avoid textarea scrolling
 			// select inserted text
 			edit.selectionStart = selStart - opentag.length;
 			edit.selectionEnd = edit.selectionStart + SelText.length;
@@ -204,10 +204,10 @@ function HKBB_OnKeyDown(ev)
 	}
 
 	// insert tags
-	edit.selectionEnd = selStart;
 	edit.value = edit.value.substring(0, selStart) +
 	             opentag + SelText + closetag +
 	             edit.value.substring(selEnd);
+	edit.selectionStart = edit.selectionEnd = selStart; // ! move the cursor to selStart to avoid textarea scrolling
 	// select the text between tags or just set the cursor there
 	edit.selectionStart = selStart + opentag.length;
 	edit.selectionEnd = edit.selectionStart + SelText.length;

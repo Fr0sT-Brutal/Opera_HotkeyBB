@@ -11,10 +11,11 @@ var changeLog =
 		highlights:
 		[
 			"Custom tags (inputable at insert)",
+			"Fixed scrolling the current line to the top when inserting/removing tags",
 		],
 		changes:
 		[
-			"+ Custom tags: set OPEN property to &quot;?&quot; and HkBB will ask you to enter tag text every time you invoke the tag. You can set CLOSE property to &quot;?&quot; as well thus getting two propmpts.",
+			"+ Custom tags: set OPEN property to &quot;?&quot; and HkBB will ask you to enter tag text every time you invoke the tag. You can set CLOSE property to &quot;?&quot; as well thus getting two prompts.",
 			"* Options page cosmetic fixes, tables look nicer"
 		]
 	},
