@@ -1,3 +1,8 @@
+1.7
++ Custom tags: set OPEN property to "?" and HkBB will ask you to enter tag text every time you invoke the tag. You can set CLOSE property to "?" as well thus getting two prompts.
+* Fixed scrolling the current line to the top when inserting/removing tags
+* Options page cosmetic fixes, tables look nicer
+
 1.6
 + "Save and close" button actually closes Preferences page
 * CSS: "transition" properties added (-o* prefixes are obsolete in Opera 12.50)
