@@ -76,6 +76,7 @@ var locStrings =
 	sDebugMsg: "HotkeyBB debug info.\n"+
 	           "Current URL: {url}\n"+
 	           "Domain: {domain}\n"+
+	           "Site-specific options applied: {sitespec}\n"+
 	           "Site options:\n"+
 	           "   Quotes {quotes}\n"+
 	           "   HTML tags {tags}\n"+

@@ -46,6 +46,7 @@ var HKBB_EvHandled = false;
 var HKBB_DefSiteOptions = DEFOPTIONS;
 var currUrl;
 var locStrings = null;
+var settLoaded = false;
 
 // Inserts values into string with patterns
 // insPattern("Extension {extname} is {extprop}!", {extname: "HotkeyBB", extprop: "awesome"}) =>
@@ -60,6 +61,51 @@ function insPattern(text, values)
                         });
 }
 
+// Loads current hotkey and tag settings including site-specific ones
+// Only called once when a key is pressed
+function loadSettings()
+{
+	// load default site options
+	try {
+		HKBB_DefSiteOptions = parseInt(widget.preferences["DefaultSiteOpts"]);
+	} catch(ex) {}
+
+	// load tag data
+	try {
+		HKBB_Tags = JSON.parse(widget.preferences["StdTags"]);
+	} catch(ex) {}
+	
+	// load site-specific data. SiteOptions might be undefined!
+	HKBB_SiteOptions = null;
+	try
+	{
+		var SiteOptions = JSON.parse(widget.preferences["SiteOptions"]);
+		// extract current URL (domain name and 1st level domain only) and get option set for it
+		currUrl = /^(https?:\/\/|file:\/\/)?(www\.)?([^\/]+)[\/]/.exec(document.URL)[3];
+		// search for site option that contain current URL
+		if (currUrl !== undefined)
+		{
+			for (var url in SiteOptions)
+			{
+				// convert "*.domain.com" URL into RE "^.*\.domain\.com$"
+				var rePatt=("^"+url+"$").replace(/\./g, "\\.").replace(/\*/g, ".*");
+				// check the current URL
+				if (new RegExp(rePatt).test(currUrl))
+				{
+					HKBB_SiteOptions = SiteOptions[url];
+					break;
+				}
+			}		
+		}
+	} catch(ex) {}
+
+	// if HKBB_SiteOptions is null or undefined (no option set for current URL) - set defaults
+	if (HKBB_SiteOptions == undefined)
+		HKBB_SiteOptions = HKBB_DefSiteOptions;
+	
+	settLoaded = true;
+}
+
 function HKBB_OnKeyDown(ev)
 {
 	// Set this flag if we catched an Event. Default processing will be cancelled
@@ -72,6 +118,8 @@ function HKBB_OnKeyDown(ev)
 	if (!ev.keyCode) return false;
 	if ((ev.keyCode == 0) || (ev.keyCode == 16) || (ev.keyCode == 17) || (ev.keyCode == 18) ) return false;
 
+	if (!settLoaded) loadSettings();
+	
 	var keyCode = ev.keyCode;
 	// fix for keycodes on numeric keypad: they come with special keycodes:
 	// '0'..'9' are #96..#105 so we need to substract 48
@@ -92,11 +140,12 @@ function HKBB_OnKeyDown(ev)
 	if (evMods == DEBUGHK_MODS && keyCode == DEBUGHK_KEY)
 	{
 		alert(insPattern(locStrings.sDebugMsg, 
-                		 {url:    document.URL,
-                		  domain: currUrl,
-                		  quotes: ((HKBB_SiteOptions & OPT_QUOTES) ? locStrings.sOn : locStrings.sOff),
-                		  tags:   ((HKBB_SiteOptions & OPT_HTMLTAG) ? locStrings.sOn : locStrings.sOff),
-                		  upcase: ((HKBB_SiteOptions & OPT_TAGUPCASE) ? locStrings.sOn : locStrings.sOff)
+                		 {url:      document.URL,
+                		  domain:   currUrl,
+                		  sitespec: (HKBB_SiteOptions != HKBB_DefSiteOptions),
+                		  quotes:   ((HKBB_SiteOptions & OPT_QUOTES) ? locStrings.sOn : locStrings.sOff),
+                		  tags:     ((HKBB_SiteOptions & OPT_HTMLTAG) ? locStrings.sOn : locStrings.sOff),
+                		  upcase:   ((HKBB_SiteOptions & OPT_TAGUPCASE) ? locStrings.sOn : locStrings.sOff)
                 		 }));
 		HKBB_EvHandled = true;
 		return true;
@@ -221,51 +270,14 @@ function HKBB_OnKeyDown(ev)
 opera.extension.addEventListener("message",
 function(ev)
 {
-	// Page is loading, init (for now, just copy localization strings)
-	if (ev.data.msg == "HKBB_Init")
+	switch(ev.data.msg)
 	{
-		locStrings = ev.data.locStrings;
-		// now load the settings
-		ev.data.msg = "HKBB_Load_Settings";
-	}
-
-	// Command from Options page to reload settings
-	if (ev.data.msg == "HKBB_Load_Settings")
-	{
-		// load default site options
-		try {
-			HKBB_DefSiteOptions = parseInt(widget.preferences["DefaultSiteOpts"]);
-		} catch(ex) {}
-	
-		// load tag data
-		try {
-			HKBB_Tags = JSON.parse(widget.preferences["StdTags"]);
-		} catch(ex) {}
-		
-		// load site-specific data. SiteOptions might be undefined!
-		try {
-			var SiteOptions = JSON.parse(widget.preferences["SiteOptions"]);
-			// extract current URL (domain name and 1st level domain only) and get option set for it
-			currUrl = /^(https?:\/\/|file:\/\/)?(www\.)?([^\/]+)[\/]/.exec(document.URL)[3];
-			// search for site option that contain current URL
-			if (currUrl !== undefined)
-			{
-				for (var url in SiteOptions)
-				{
-					// convert "*.domain.com" URL into RE
-					var rePatt=("^"+url+"$").replace(/\./g, "\\.").replace(/\*/g, ".*");
-					// check the current URL
-					if (new RegExp(rePatt).test(currUrl))
-					{
-						HKBB_SiteOptions = SiteOptions[url];
-						break;
-					}
-				}		
-			}
-		} catch(ex) {}
-		// if HKBB_SiteOptions is null or undefined (no option set for current URL) - set defaults
-		if (HKBB_SiteOptions == undefined)
-			HKBB_SiteOptions = HKBB_DefSiteOptions;
+		// Page is loading, init (for now, just copy localization strings)
+		case "HKBB_Init":
+			locStrings = ev.data.locStrings;
+		// Command from Options page to reload settings
+		case "HKBB_Load_Settings":
+			loadSettings();
 	}
 }
 , false);

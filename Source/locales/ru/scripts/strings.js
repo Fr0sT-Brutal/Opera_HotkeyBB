@@ -76,6 +76,7 @@ var locStrings =
 	sDebugMsg: "Отладочные данные HotkeyBB.\n"+
 	           "Текущий URL: {url}\n"+
 	           "Домен: {domain}\n"+
+	           "Применены персональные опции сайта: {sitespec}\n"+
 	           "Опции сайта:\n"+
 	           "   Кавычки {quotes}\n"+
 	           "   HTML теги {tags}\n"+

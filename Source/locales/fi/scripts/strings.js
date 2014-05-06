@@ -76,6 +76,7 @@ var locStrings =
 	sDebugMsg: "HotkeyBB:n debug-tietoja.\n"+
 	           "Sivun osoite: {url}\n"+
 	           "Domain: {domain}\n"+
+	           "Site-specific options applied: {sitespec}\n"+
 	           "Sivustokohtaiset asetukset:\n"+
 	           "   Lainausmerkit {quotes}\n"+
 	           "   HTML-tagit {tags}\n"+
